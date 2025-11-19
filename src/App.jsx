@@ -1,0 +1,58 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Necklaces from "./pages/Necklaces";
+import Home from "./pages/Home";
+import JewelryDetail from "./pages/JewellaryDetails";
+import ProductPage from "./pages/JewellaryDetails";
+import TextSlider from "./layout/TextSlider";
+import Navbar from "./layout/Navbar";
+import Footer from "./layout/Footer";
+import { LoaderProvider } from "./context/LoaderContext";
+import Rings from "./pages/Rings";
+import Bracelets from "./pages/Bracelets";
+import Earrings from "./pages/Earrings";
+import Anklets from "./pages/Anklets";
+import Chains from "./pages/Chains";
+import Others from "./pages/Others";
+import Cart from "./pages/Cart";
+import ScrollToTop from "./layout/ScrollToTop";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
+import BuildYourOwn from "./pages/BuildYourOwn";
+import JewelleryAdminPage from "./pages/JewelleryAdminPage";
+import AdminLogin from "./pages/AdminLogin";
+
+function App() {
+  const mockCart = [
+  { name: "Elegant Earrings", price: 899, quantity: 2, image: "/earrings.jpg" },
+  { name: "Gold Necklace", price: 2499, quantity: 1, image: "/necklace.jpg" },
+];
+  return (
+    <BrowserRouter>
+      <LoaderProvider>
+        <TextSlider />
+        <Navbar />
+        <ScrollToTop/>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/necklaces" element={<Necklaces />} />
+          <Route path="/rings" element={<Rings />} />
+          <Route path="/bracelets" element={<Bracelets />} />
+          <Route path="/earrings" element={<Earrings />} />
+          <Route path="/anklets" element={<Anklets />} />
+          <Route path="/chains" element={<Chains />} />
+          <Route path="/others" element={<Others />} />
+          <Route path="/cart" element={<Cart cartItems={mockCart} />} />
+          <Route path="/contact" element={<ContactUs/>} />
+          <Route path="/jd" element={<ProductPage />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/build-your-own" element={<BuildYourOwn  />} />
+          <Route path="/admin/dashboard" element={<JewelleryAdminPage />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+        </Routes>
+        <Footer />
+      </LoaderProvider>
+    </BrowserRouter>
+  );
+}
+
+export default App;

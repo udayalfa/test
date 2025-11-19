@@ -1,0 +1,69 @@
+import { useState } from "react";
+import { loginUser } from "../api/authApi";
+
+export default function AdminLogin() {
+  const [formData,setFormData] = useState({
+    email: "",
+    password: ""
+  });
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+   const data = await loginUser(formData)
+   console.log(data);
+  }
+
+  return (
+    <div
+      className="min-h-screen relative bg-fixed bg-center bg-cover flex flex-col items-center justify-start py-20 px-6 text-gray-800 overflow-auto"
+      style={{
+        backgroundImage:
+          "url('/img/image1.jpg')", // Replace with your jewelry background image path
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-30 z-0"></div>
+      <div className="w-full max-w-md mx-auto p-8 bg-white bg-opacity-95 shadow-2xl rounded-2xl border border-pink-100 flex flex-col items-center z-10">
+        <div className="text-3xl font-extrabold  mb-2 text-center">
+          Jewellery Store Admin
+        </div>
+        <div className="mb-6 text-gray-500 text-center text-lg font-semibold">
+          Elegance Meets Management
+        </div>
+        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+          <input
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={e => setFormData({ ...formData, email: e.target.value })}
+            className="w-full px-4 py-3 rounded-lg border text-lg"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={e => setFormData({ ...formData, password: e.target.value })}
+            className="w-full px-4 py-3 rounded-lg border text-lg"
+            required
+          />
+          {error && (
+            <div className="text-red-500 text-center font-semibold">
+              {error}
+            </div>
+          )}
+          <button
+            type="submit"
+            className="w-full cursor-pointer bg-black mt-2 bg-gradient-to-r text-white font-bold py-3 rounded-lg shadow"
+          >
+            Login
+          </button>
+          <div className=" text-gray-400 text-center pt-2">
+            Admin access only
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
