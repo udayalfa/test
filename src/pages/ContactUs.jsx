@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { contact } from "../api/contactApi";
+import { toast } from "react-toastify";
+import { useLoader } from "../context/LoaderContext";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -8,14 +11,21 @@ const ContactUs = () => {
     subject: "",
     message: "",
   });
-
+  const {show,hide} = useLoader()
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Thank you ${formData.name}! Your message has been sent.`);
+  const handleSubmit = async () => {
+    show()
+    try{
+      const response = await contact(formData)
+      toast.success("Form Submitted Successfully")
+    }catch(e){
+      toast.error("Something went wrong")
+    }finally{
+      hide()
+    }
   };
 
   return (
@@ -43,7 +53,7 @@ const ContactUs = () => {
         ></div>
 
         {/* Right Side - Form */}
-        <form onSubmit={handleSubmit} className="space-y-6 p-8 bg-white">
+        <div  className="space-y-6 p-8 bg-white">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <label className="block mb-2 font-medium">Name</label>
@@ -112,12 +122,12 @@ const ContactUs = () => {
           </div>
 
           <button
-            type="submit"
-            className="w-full py-3 text-lg cursor-pointer rounded-lg border border-gray-300 text-black hover:bg-opacity-90 transition-transform transform hover:scale-105 active:scale-95 duration-300"
+            onClick={handleSubmit}
+            className="w-full py-3 text-lg cursor-pointer rounded-lg border border-gray-300 text-black hover:bg-custom-yellow transition-transform transform hover:scale-105 active:scale-95 duration-300"
           >
             Send Message
           </button>
-        </form>
+        </div>
       </div>
       <div>
         <h1 className="text-4xl sm:text-5xl mt-12 text-center animate-fade-up">

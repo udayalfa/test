@@ -2,8 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import FeatureSection from "../components/FeatureSection";
 import JewellaryData from "../components/JewellaryData";
 import JewellaryImages from "../components/JewellaryImages";
+import { useLocation, useParams } from "react-router-dom";
+import { getJewellaryById } from "../api/jewellaryApi";
 
-const ProductDetail = ({ product }) => {
+const JewellaryDetail = () => {
+  const { id } = useParams();
+  const [jewellary, setJewellary] = useState(null);
+  useEffect(() => {
+    const api = async () => {
+      const { data } = await getJewellaryById(id);
+      setJewellary(data);
+    };
+    api();
+  }, [id]);
+
   const [quantity, setQuantity] = useState(1);
   const [current, setCurrent] = useState(0);
   const timeoutRef = useRef(null);
@@ -11,11 +23,11 @@ const ProductDetail = ({ product }) => {
   // Auto-slide every 3 seconds
   useEffect(() => {
     const next = () => {
-      setCurrent((prev) => (prev + 1) % product.images.length);
+      setCurrent((prev) => (prev + 1) % jewellary?.images.length);
     };
     timeoutRef.current = setInterval(next, 3000);
     return () => clearInterval(timeoutRef.current);
-  }, [product.images.length]);
+  }, [jewellary?.images.length]);
 
   const incrementQty = () => setQuantity((q) => Math.min(q + 1, product.stock));
   const decrementQty = () => setQuantity((q) => Math.max(q - 1, 1));
@@ -30,14 +42,14 @@ const ProductDetail = ({ product }) => {
     <div className="">
       <div className="p-6 flex flex-col md:flex-row gap-10">
         <JewellaryImages
-          product={product}
+          product={jewellary}
           current={current}
           setCurrent={setCurrent}
           handleThumbnailClick={handleThumbnailClick}
         />
 
         <JewellaryData
-          product={product}
+          product={jewellary}
           quantity={quantity}
           incrementQty={incrementQty}
           decrementQty={decrementQty}
@@ -50,29 +62,4 @@ const ProductDetail = ({ product }) => {
   );
 };
 
-// Example usage with sample data
-const sampleProduct = {
-  name: "Abnash Jewellers Anti-Tarnish Trillion Crystal Cocktail Ring (Adjustable Size)",
-  description: `This exquisite necklace captures the essence of timeless elegance,
-        crafted to adorn your neckline with a gentle radiance that speaks of
-        grace and sophistication. Each delicate link is meticulously
-        handcrafted, weaving together the warmth of pure gold with the
-        brilliance of finely cut stones that dance with every glimmer of light.`,
-  images: [
-    "/img/image1.jpg",
-    "/img/image1.jpg",
-    "/img/image1.jpg",
-    "/img/image1.jpg",
-    "/img/image1.jpg",
-    // "/img/image1.jpg",
-    // more image URLs
-  ],
-  weight: 149,
-  rating: 2,
-  deliveryDays: 3,
-  stock: 4,
-};
-
-export default function ProductPage() {
-  return <ProductDetail product={sampleProduct} />;
-}
+export default JewellaryDetail;

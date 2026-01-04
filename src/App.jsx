@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Necklaces from "./pages/Necklaces";
 import Home from "./pages/Home";
-import JewelryDetail from "./pages/JewellaryDetails";
-import ProductPage from "./pages/JewellaryDetails";
 import TextSlider from "./layout/TextSlider";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
@@ -20,6 +18,8 @@ import ContactUs from "./pages/ContactUs";
 import BuildYourOwn from "./pages/BuildYourOwn";
 import JewelleryAdminPage from "./pages/JewelleryAdminPage";
 import AdminLogin from "./pages/AdminLogin";
+import JewellaryDetail from "./pages/JewelaryDetails";
+import Admin from "./pages/Admin";
 
 function App() {
   const mockCart = [
@@ -43,11 +43,10 @@ function App() {
           <Route path="/others" element={<Others />} />
           <Route path="/cart" element={<Cart cartItems={mockCart} />} />
           <Route path="/contact" element={<ContactUs/>} />
-          <Route path="/jd" element={<ProductPage />} />
+          <Route path="/:id" element={<JewellaryDetail />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/build-your-own" element={<BuildYourOwn  />} />
-          <Route path="/admin/dashboard" element={<JewelleryAdminPage />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<Admin/>} />
         </Routes>
         <Footer />
       </LoaderProvider>

@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { buildYourOwn } from "../api/contactApi";
+import { toast } from "react-toastify";
+import { useLoader } from "../context/LoaderContext";
 
 const BuildYourOwn = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +12,7 @@ const BuildYourOwn = () => {
     description: "",
     image: null,
   });
-
+  const {show,hide} = useLoader()
   const [imagePreview, setImagePreview] = useState(null);
 
   const handleChange = (e) => {
@@ -30,19 +33,29 @@ const BuildYourOwn = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(
-      `Thank you ${formData.name}! Your custom jewelry query has been sent. We will contact you soon.`
-    );
+  const handleSubmit = async () => {
+    show()
+    const formDataObj = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value) formDataObj.append(key, value);
+    });
+    try {
+      const response = await buildYourOwn(formDataObj);
+      toast.success("Form Submitted Successfully")
+      console.log(response);
+    } catch (e) {
+      toast.error("Something went wrong")
+      console.log(e);
+    }finally{
+      hide()
+    }
   };
 
   return (
     <div
       className="min-h-screen relative bg-fixed bg-center bg-cover flex flex-col items-center justify-start py-20 px-6 text-gray-800 overflow-auto"
       style={{
-        backgroundImage:
-          "url('/img/image1.jpg')", // Replace with your jewelry background image path
+        backgroundImage: "url('/img/image1.jpg')", // Replace with your jewelry background image path
       }}
     >
       {/* Overlay */}
@@ -52,7 +65,7 @@ const BuildYourOwn = () => {
       <div className="relative z-10 max-w-4xl w-full bg-white/50 bg-opacity-90 rounded-3xl shadow-2xl p-10 animate-fade-in-up">
         <header className="text-center mb-10">
           <h1 className="text-4xl sm:text-5xl mb-4">
-            Build Your Own Jewelry
+            Build Your Own Jewellary
           </h1>
           <p className="text-lg max-w-3xl mx-auto text-gray-700">
             Share your vision! Upload an image or describe the jewelry you want
@@ -60,7 +73,7 @@ const BuildYourOwn = () => {
           </p>
         </header>
 
-        <form onSubmit={handleSubmit} autoComplete="off" className="space-y-8">
+        <div autoComplete="off" className="space-y-8">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <label className="block mb-2 font-medium">Name</label>
@@ -136,7 +149,9 @@ const BuildYourOwn = () => {
           </div>
 
           <div>
-            <label className="block mb-2 font-medium">Upload an image (optional)</label>
+            <label className="block mb-2 font-medium">
+              Upload an image (optional)
+            </label>
             <input
               type="file"
               accept="image/*"
@@ -153,12 +168,12 @@ const BuildYourOwn = () => {
           </div>
 
           <button
-            type="submit"
+            onClick={handleSubmit}
             className="w-full py-3 text-lg rounded-lg bg-black cursor-pointer text-white"
           >
             Submit Your Design
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

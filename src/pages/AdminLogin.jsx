@@ -1,25 +1,34 @@
 import { useState } from "react";
 import { loginUser } from "../api/authApi";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useLoader } from "../context/LoaderContext";
 
 export default function AdminLogin() {
-  const [formData,setFormData] = useState({
+  const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
+  const {show,hide} = useLoader()
   const [error, setError] = useState("");
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-   const data = await loginUser(formData)
-   console.log(data);
+  const navigate = useNavigate();
+  async function handleSubmit() {
+    try {
+      show()
+      const data = await loginUser(formData);
+      navigate("/admin/dashboard");
+    } catch (e) {
+      toast.error("Invalid Credentials");
+    }finally{
+      hide()
+    }
   }
 
   return (
     <div
       className="min-h-screen relative bg-fixed bg-center bg-cover flex flex-col items-center justify-start py-20 px-6 text-gray-800 overflow-auto"
       style={{
-        backgroundImage:
-          "url('/img/image1.jpg')", // Replace with your jewelry background image path
+        backgroundImage: "url('/img/image1.jpg')", // Replace with your jewelry background image path
       }}
     >
       {/* Overlay */}
@@ -31,12 +40,14 @@ export default function AdminLogin() {
         <div className="mb-6 text-gray-500 text-center text-lg font-semibold">
           Elegance Meets Management
         </div>
-        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+        <div className="w-full flex flex-col gap-4">
           <input
             type="email"
             placeholder="Email"
             value={formData.email}
-            onChange={e => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
             className="w-full px-4 py-3 rounded-lg border text-lg"
             required
           />
@@ -44,7 +55,9 @@ export default function AdminLogin() {
             type="password"
             placeholder="Password"
             value={formData.password}
-            onChange={e => setFormData({ ...formData, password: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
             className="w-full px-4 py-3 rounded-lg border text-lg"
             required
           />
@@ -54,7 +67,7 @@ export default function AdminLogin() {
             </div>
           )}
           <button
-            type="submit"
+            onClick={handleSubmit}
             className="w-full cursor-pointer bg-black mt-2 bg-gradient-to-r text-white font-bold py-3 rounded-lg shadow"
           >
             Login
@@ -62,7 +75,7 @@ export default function AdminLogin() {
           <div className=" text-gray-400 text-center pt-2">
             Admin access only
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

@@ -9,4 +9,5 @@ export const links = [
   { name: "About Us", path: "/about" },
   { name: "Build Your Own", path: "/build-your-own" },
   { name: "Contact Us", path: "/contact" },
+  { name: "Admin", path: "/admin" },
 ];

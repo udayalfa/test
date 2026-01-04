@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import ImageModal from "./ImageModal";
 
-function JewellaryImages({ product, current, setCurrent, handleThumbnailClick }) {
+function JewellaryImages({
+  product,
+  current,
+  setCurrent,
+  handleThumbnailClick,
+}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -11,7 +16,7 @@ function JewellaryImages({ product, current, setCurrent, handleThumbnailClick })
           className="flex transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
-          {product.images.map((img, idx) => (
+          {product?.images.map((img, idx) => (
             <img
               key={idx}
               src={img}
@@ -26,7 +31,7 @@ function JewellaryImages({ product, current, setCurrent, handleThumbnailClick })
         <button
           onClick={() =>
             setCurrent((prev) =>
-              prev === 0 ? product.images.length - 1 : prev - 1
+              prev === 0 ? product?.images.length - 1 : prev - 1
             )
           }
           className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white text-gray-800 p-3 cursor-pointer rounded-full shadow"
@@ -35,7 +40,7 @@ function JewellaryImages({ product, current, setCurrent, handleThumbnailClick })
         </button>
         <button
           onClick={() =>
-            setCurrent((prev) => (prev + 1) % product.images.length)
+            setCurrent((prev) => (prev + 1) % product?.images.length)
           }
           className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white text-gray-800 p-3 cursor-pointer rounded-full shadow"
         >
@@ -44,8 +49,8 @@ function JewellaryImages({ product, current, setCurrent, handleThumbnailClick })
       </div>
 
       {/* Thumbnails */}
-      <div className="flex bg-white p-4 justify-around gap-2">
-        {product.images.map((img, idx) => (
+      <div className="flex space-x-5 ml-5 bg-white p-4  gap-2">
+        {product?.images.map((img, idx) => (
           <img
             key={idx}
             src={img}
@@ -61,8 +66,8 @@ function JewellaryImages({ product, current, setCurrent, handleThumbnailClick })
       {/* Fullscreen Modal */}
       {showModal && (
         <ImageModal
-          src={product.images[current]}
-          alt={product.name}
+          src={product?.images[current]}
+          alt={product?.name || "N/A"}
           onClose={() => setShowModal(false)}
         />
       )}
