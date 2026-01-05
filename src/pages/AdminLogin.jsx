@@ -4,23 +4,23 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useLoader } from "../context/LoaderContext";
 
-export default function AdminLogin() {
+export default function AdminLogin({ setIsAuthenticated, setUser }) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const {show,hide} = useLoader()
+  const { show, hide } = useLoader();
   const [error, setError] = useState("");
-  const navigate = useNavigate();
   async function handleSubmit() {
     try {
-      show()
+      show();
       const data = await loginUser(formData);
-      navigate("/admin/dashboard");
+      setUser(data.user);
+      setIsAuthenticated(true);
     } catch (e) {
       toast.error("Invalid Credentials");
-    }finally{
-      hide()
+    } finally {
+      hide();
     }
   }
 

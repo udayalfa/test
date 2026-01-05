@@ -3,14 +3,14 @@ import AdminLogin from "./AdminLogin";
 import JewelleryAdminPanel from "./JewelleryAdminPage";
 
 export default function Admin() {
-  const {isAuthenticated, user } = useAuth();
- 
+  const {isAuthenticated, user , setIsAuthenticated,setUser } = useAuth();
+  
   return (
     <>
       {isAuthenticated && user?.role == "admin" ? (
         <JewelleryAdminPanel />
       ) : (
-        <AdminLogin />
+        <AdminLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
       )}
     </>
   );
