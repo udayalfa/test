@@ -41,7 +41,7 @@ function App() {
           <Route path="/anklets" element={<Anklets />} />
           <Route path="/chains" element={<Chains />} />
           <Route path="/others" element={<Others />} />
-          <Route path="/cart" element={<Cart cartItems={mockCart} />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<ContactUs/>} />
           <Route path="/:id" element={<JewellaryDetail />} />
           <Route path="/about" element={<AboutUs />} />

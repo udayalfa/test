@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
-function JewellaryData({ product, quantity, incrementQty, decrementQty }) {
+function JewellaryData({ product }) {
+  const [quantity, setQuantity] = useState(1);
+  const incrementQty = () => setQuantity((q) => Math.min(q + 1, product.stock));
+  const decrementQty = () => setQuantity((q) => Math.max(q - 1, 1));
+
+  
+  const cartHandler = () => {
+    const existingCart = JSON.parse(localStorage.getItem("products")) || [];
+    const productExists = existingCart.find((p) => p.product._id === product._id);
+    if (!productExists) {
+      const data = {totalItems : quantity , product}
+      existingCart.push(data);
+      localStorage.setItem("products", JSON.stringify(existingCart));
+    }
+  };
+
   return (
     <div className="md:w-1/2 flex flex-col shadow bg-white p-4">
-      <h1 className="text-2xl font-bold mb-2">{product?.name} ({product?.shortDescription})</h1>
+      <h1 className="text-2xl font-bold mb-2">
+        {product?.name} ({product?.shortDescription})
+      </h1>
       <div className="text-2xl font-semibold mb-1 flex items-center gap-2">
         <span>{product?.weight} gm</span>
       </div>
@@ -15,9 +32,7 @@ function JewellaryData({ product, quantity, incrementQty, decrementQty }) {
         ))}
       </div>
       {/* description */}
-      <p>
-       {product?.description}
-      </p>
+      <p>{product?.description}</p>
       {/* Shipping and offers */}
       <div className="my-4 space-y-2">
         <p>All India Delivery Within {product?.deliveryDays} Days</p>
@@ -34,7 +49,7 @@ function JewellaryData({ product, quantity, incrementQty, decrementQty }) {
         <div className="flex items-center border w-28 justify-between">
           <button
             onClick={decrementQty}
-            className="px-3 py-1 text-2xl font-bold"
+            className="px-3 py-1 cursor-pointer text-2xl font-bold"
             disabled={quantity <= 1}
           >
             −
@@ -42,14 +57,17 @@ function JewellaryData({ product, quantity, incrementQty, decrementQty }) {
           <span>{quantity}</span>
           <button
             onClick={incrementQty}
-            className="px-3 py-1 text-2xl font-bold"
+            className="px-3 py-1 cursor-pointer text-2xl font-bold"
             disabled={quantity >= product?.stock}
           >
             +
           </button>
         </div>
 
-        <button className="bg-black text-white px-8 py-3 font-semibold hover:bg-gray-900 transition">
+        <button
+          onClick={cartHandler}
+          className="bg-black cursor-pointer text-white px-8 py-3 font-semibold hover:bg-gray-900 transition"
+        >
           ADD TO CART
         </button>
       </div>

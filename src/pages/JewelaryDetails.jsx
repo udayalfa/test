@@ -4,22 +4,30 @@ import JewellaryData from "../components/JewellaryData";
 import JewellaryImages from "../components/JewellaryImages";
 import { useLocation, useParams } from "react-router-dom";
 import { getJewellaryById } from "../api/jewellaryApi";
+import { useLoader } from "../context/LoaderContext";
 
 const JewellaryDetail = () => {
   const { id } = useParams();
   const [jewellary, setJewellary] = useState(null);
+  const { show, hide } = useLoader();
   useEffect(() => {
     const api = async () => {
-      const { data } = await getJewellaryById(id);
-      setJewellary(data);
+      try {
+        show()
+        const { data } = await getJewellaryById(id);
+        setJewellary(data);
+      } catch (e) {
+        console.log(e)
+      }finally{
+        hide()
+      }
     };
     api();
   }, [id]);
 
-  const [quantity, setQuantity] = useState(1);
   const [current, setCurrent] = useState(0);
   const timeoutRef = useRef(null);
-
+  
   // Auto-slide every 3 seconds
   useEffect(() => {
     const next = () => {
@@ -28,9 +36,8 @@ const JewellaryDetail = () => {
     timeoutRef.current = setInterval(next, 3000);
     return () => clearInterval(timeoutRef.current);
   }, [jewellary?.images.length]);
-
-  const incrementQty = () => setQuantity((q) => Math.min(q + 1, product.stock));
-  const decrementQty = () => setQuantity((q) => Math.max(q - 1, 1));
+  
+ 
 
   // Manual thumbnail click resets timer
   const handleThumbnailClick = (idx) => {
@@ -50,9 +57,6 @@ const JewellaryDetail = () => {
 
         <JewellaryData
           product={jewellary}
-          quantity={quantity}
-          incrementQty={incrementQty}
-          decrementQty={decrementQty}
         />
       </div>
       {/* Image section */}

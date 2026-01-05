@@ -4,7 +4,7 @@ import { links } from "../utils/navLinks";
 const Navbar = () => {
   const navigate = useNavigate();
   return (
-    <nav className={`sticky top-0 z-50 flex items-center justify-between px-8 py-4 bg-white transition-shadow duration-300`}>
+    <nav className={`sticky top-0 z-50 flex items-baseline-last justify-between px-8 py-4 bg-white transition-shadow duration-300`}>
       {/* Left side: navigation items */}
       <div className="flex-1 flex justify-start space-x-8 text-gray-900 text-[19px]">
         {links.slice(0, 7).map((link, index) => (
