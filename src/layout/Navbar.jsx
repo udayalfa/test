@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <nav
       className="
-        sticky top-0 z-50
+        sticky top-0 z-30
         hidden md:flex
          items-baseline-last justify-between
         px-6 lg:px-8

@@ -5,44 +5,9 @@ import {
   getFullJewellaryByCategory,
   updateJewellary,
 } from "../api/jewellaryApi";
-import Loader from "../components/UIElement/Loader";
 import { useLoader } from "../context/LoaderContext";
-import useJewelleryByCategory from "../hooks/useJewelleryByCategory";
-import useAuth from "../hooks/useAuth";
-import { Navigate } from "react-router-dom";
 import { error, success } from "../components/UIElement/toastsObj";
 import Swal from "sweetalert2";
-
-// Example data (replace with your backend/API)
-const initialInventory = [
-  {
-    _id: "1",
-    name: "Gold Necklace",
-    description: "22K gold with diamonds.",
-    category: "Necklace",
-    gender: "Women",
-    metalType: "Gold",
-    purity: "22K",
-    weight: "14g",
-    stoneType: "Diamond",
-    images: ["https://your-cloud-url.com/img1.jpg"],
-    stock: 3,
-  },
-  {
-    _id: "2",
-    name: "Silver Ring",
-    description: "925 Silver ring for men.",
-    category: "Ring",
-    gender: "Men",
-    metalType: "Silver",
-    purity: "925",
-    weight: "5g",
-    stoneType: "",
-    images: ["https://your-cloud-url.com/img2.jpg"],
-    stock: 10,
-  },
-  // ...more sample items
-];
 
 const categories = [
   "Necklace",
@@ -68,7 +33,6 @@ const purity = ["22K", "18K", "925 Silver"];
 const stoneType = ["Diamond", "Ruby", "Emerald", "Kundan", "Others"];
 
 export default function JewelleryAdminPanel() {
-  const [inventory, setInventory] = useState(initialInventory);
   const [originalData, setOriginalData] = useState(null);
   const [jewellaries, setJewellaries] = useState([]);
   const [selectedCat, setSelectedCat] = useState("Necklace");
@@ -194,36 +158,62 @@ export default function JewelleryAdminPanel() {
     return payload;
   };
 
+  const MAX_IMAGES = 5;
+  const MAX_FILE_SIZE = 3 * 1024 * 1024; // 2MB
+  const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif"];
+
   const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    if (!files.length) return;
+    const selectedFiles = Array.from(e.target.files);
+    if (!selectedFiles.length) return;
 
     const existingCount = formData.images?.length || 0;
     const updatedCount = originalData?.updatedImages?.length || 0;
-    const totalCount = existingCount + updatedCount + files.length;
+    const totalCount = existingCount + updatedCount + selectedFiles.length;
 
-    if (totalCount > 5) {
-      alert("You can upload maximum 5 images");
+    if (totalCount > MAX_IMAGES) {
+      error("You can upload a maximum of 5 images.");
+      e.target.value = "";
       return;
     }
 
+    // ✅ Validate files
+    const validFiles = [];
+    for (const file of selectedFiles) {
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        error(`Unsupported file type: ${file.name}`);
+        continue;
+      }
+
+      if (file.size > MAX_FILE_SIZE) {
+        error(`"${file.name}" exceeds 3MB size limit`);
+        continue;
+      }
+
+      validFiles.push(file);
+    }
+
+    if (!validFiles.length) {
+      e.target.value = "";
+      return;
+    }
+
+    // ✅ Handle edit vs create
     if (editingId) {
-      // ✅ ONLY store new files
       setOriginalData((prev) => ({
         ...prev,
-        updatedImages: [...prev.updatedImages, ...files],
+        updatedImages: [...(prev.updatedImages || []), ...validFiles],
       }));
     } else {
       setFormData((prev) => ({
         ...prev,
-        images: [...prev.images, ...files],
+        images: [...(prev.images || []), ...validFiles],
       }));
     }
 
-    setPreviews((prev) => [
-      ...prev,
-      ...files.map((file) => URL.createObjectURL(file)),
-    ]);
+    // ✅ Create previews
+    const newPreviews = validFiles.map((file) => URL.createObjectURL(file));
+
+    setPreviews((prev) => [...prev, ...newPreviews]);
 
     e.target.value = "";
   };
@@ -514,6 +504,9 @@ export default function JewelleryAdminPanel() {
             <div>
               <label className="block text-sm font-semibold mb-1">
                 Images (1–5)
+                <p className="text-xs text-gray-500 mt-1">
+                  Upload up to 5 images — maximum size 2MB per image.
+                </p>
               </label>
 
               <label

@@ -21,17 +21,49 @@ const BuildYourOwn = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const MAX_FILE_SIZE = 1.5 * 1024 * 1024; // 1.5MB
+  const MAX_DIMENSION = 2000; // 2000px
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setFormData((prev) => ({ ...prev, image: file }));
 
-    if (file) {
+    if (!file) return;
+
+    console.log(file.size / 1024);
+    if (file.size > MAX_FILE_SIZE) {
+      error("Image size must be less than 1.5MB");
+      e.target.value = "";
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      error("Only image files are allowed");
+      e.target.value = "";
+      return;
+    }
+
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+
+    img.onload = () => {
+      const { width, height } = img;
+
+      if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
+        error("Image dimensions must not exceed 2000×2000px");
+        e.target.value = "";
+        URL.revokeObjectURL(img.src);
+        return;
+      }
+
+      // ✅ Accept image
+      setFormData((prev) => ({ ...prev, image: file }));
+
       const reader = new FileReader();
       reader.onloadend = () => setImagePreview(reader.result);
       reader.readAsDataURL(file);
-    } else {
-      setImagePreview(null);
-    }
+
+      URL.revokeObjectURL(img.src);
+    };
   };
 
   const handleSubmit = async () => {
@@ -42,10 +74,10 @@ const BuildYourOwn = () => {
     });
     try {
       const response = await buildYourOwn(formDataObj);
-      success("Form Submitted Successfully")
+      success("Form Submitted Successfully");
       console.log(response);
     } catch (e) {
-      error("Something went wrong")
+      error("Something went wrong");
       console.log(e);
     } finally {
       hide();
@@ -184,6 +216,10 @@ const BuildYourOwn = () => {
               onChange={handleImageChange}
               className="block w-full text-gray-700 file:rounded-lg file:border file:border-gray-600 file:px-4 file:py-2  transition duration-300 cursor-pointer"
             />
+            <p className="text-xs text-gray-500 mt-1">
+              Max 1.5MB • 2000×2000px • JPG / PNG
+            </p>
+
             {imagePreview && (
               <img
                 src={imagePreview}

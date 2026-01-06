@@ -14,9 +14,9 @@ const Footer = () => {
           <h3 className="text-3xl mb-4 ">About Us</h3>
           <p className="text-xl text-gray-800">
             ABNASH isn’t just crystals, it’s passion poured into every ornament.
-            Our dedicated team of over 108 full-time experts, designers, and
-            stylists collaborate meticulously to deliver unparalleled quality
-            and unmatched customer satisfaction.
+            Our dedicated team of experts, designers, and stylists collaborate
+            meticulously to deliver unparalleled quality and unmatched customer
+            satisfaction.
           </p>
         </div>
 
@@ -44,10 +44,12 @@ const Footer = () => {
             <p>We’re here to help with orders, designs, and inquiries.</p>
             <p>Expect a response from our team within 24 hours.</p>
 
-            <div className="pt-3 space-y-1">
-              <div className="flex items-center space-x-1">
+            <div className="pt-3 space-y-2">
+              {/* Canada */}
+              <div className="flex items-center space-x-2">
                 <FaPhoneAlt />
-                Phone:&nbsp;
+                <span className="text-lg">🇨🇦</span>
+                {/* <span>Phone:</span> */}
                 <a
                   href="tel:+15069888000"
                   className="font-medium text-black hover:underline"
@@ -56,8 +58,23 @@ const Footer = () => {
                 </a>
               </div>
 
-              <div className="flex items-center space-x-1">
-                <MdEmail /> Email:&nbsp;
+              {/* India */}
+              <div className="flex items-center space-x-2">
+                <FaPhoneAlt />
+                <span className="text-lg">🇮🇳</span>
+                {/* <span>Phone:</span> */}
+                <a
+                  href="tel:+919888471818"
+                  className="font-medium text-black hover:underline"
+                >
+                  +91 98884 71818
+                </a>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-center space-x-2">
+                <MdEmail />
+                <span>Email:</span>
                 <a
                   href="mailto:Abnashsoni@gmail.com"
                   className="font-medium text-black hover:underline"

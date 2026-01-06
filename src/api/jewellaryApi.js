@@ -12,6 +12,10 @@ export const getJewellaryByCategory = async (category) => {
   const { data } = await apiClient.get("/jewellary/all/" + category);
   return data;
 };
+export const getHomeJewellery = async () => {
+  const { data } = await apiClient.get("/jewellary/home");
+  return data;
+};
 export const getFullJewellaryByCategory = async (category) => {
   const { data } = await apiClient.get("/jewellary/allDetails/" + category);
   return data;
