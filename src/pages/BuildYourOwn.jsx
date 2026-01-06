@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { buildYourOwn } from "../api/contactApi";
-import { toast } from "react-toastify";
 import { useLoader } from "../context/LoaderContext";
+import toast from "react-hot-toast";
+import { error, success } from "../components/UIElement/toastsObj";
 
 const BuildYourOwn = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ const BuildYourOwn = () => {
     description: "",
     image: null,
   });
-  const {show,hide} = useLoader()
+  const { show, hide } = useLoader();
   const [imagePreview, setImagePreview] = useState(null);
 
   const handleChange = (e) => {
@@ -34,20 +35,20 @@ const BuildYourOwn = () => {
   };
 
   const handleSubmit = async () => {
-    show()
+    show();
     const formDataObj = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
       if (value) formDataObj.append(key, value);
     });
     try {
       const response = await buildYourOwn(formDataObj);
-      toast.success("Form Submitted Successfully")
+      success("Form Submitted Successfully")
       console.log(response);
     } catch (e) {
-      toast.error("Something went wrong")
+      error("Something went wrong")
       console.log(e);
-    }finally{
-      hide()
+    } finally {
+      hide();
     }
   };
 
@@ -63,11 +64,36 @@ const BuildYourOwn = () => {
 
       {/* Content - form container */}
       <div className="relative z-10 max-w-4xl w-full bg-white/50 bg-opacity-90 rounded-3xl shadow-2xl p-10 animate-fade-in-up">
-        <header className="text-center mb-10">
-          <h1 className="text-4xl sm:text-5xl mb-4">
-            Build Your Own Jewellary
+        <header className="text-center mb-8 sm:mb-10 lg:mb-14 px-4">
+          <h1
+            className="
+      font-light
+      tracking-tight
+      mb-3
+      text-2xl
+      sm:text-3xl
+      md:text-5xl
+      lg:text-5xl
+      xl:text-6xl
+    "
+          >
+            Build Your Own Jewelry
           </h1>
-          <p className="text-lg max-w-3xl mx-auto text-gray-700">
+
+          <p
+            className="
+      mx-auto
+      max-w-xl
+      sm:max-w-2xl
+      lg:max-w-4xl
+      text-sm
+      sm:text-base
+      md:text-lg
+      lg:text-xl
+      text-gray-700
+      leading-relaxed
+    "
+          >
             Share your vision! Upload an image or describe the jewelry you want
             to create, and our artisans will bring it to life.
           </p>

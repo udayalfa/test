@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import {
   createJewellary,
+  deleteJewellary,
   getFullJewellaryByCategory,
   updateJewellary,
 } from "../api/jewellaryApi";
 import Loader from "../components/UIElement/Loader";
-import { toast } from "react-toastify";
 import { useLoader } from "../context/LoaderContext";
 import useJewelleryByCategory from "../hooks/useJewelleryByCategory";
 import useAuth from "../hooks/useAuth";
 import { Navigate } from "react-router-dom";
+import { error, success } from "../components/UIElement/toastsObj";
+import Swal from "sweetalert2";
 
 // Example data (replace with your backend/API)
 const initialInventory = [
@@ -76,21 +78,20 @@ export default function JewelleryAdminPanel() {
   const { show, hide } = useLoader();
 
   useEffect(() => {
-    const fetchJewellery = async () => {
-      try {
-        show();
-        const { data } = await getFullJewellaryByCategory(selectedCat);
-        setJewellaries(data.jewellery || data);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        hide();
-      }
-    };
-
     fetchJewellery();
   }, [selectedCat]);
 
+  const fetchJewellery = async () => {
+    try {
+      show();
+      const { data } = await getFullJewellaryByCategory(selectedCat);
+      setJewellaries(data.jewellery || data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      hide();
+    }
+  };
   function getEmptyForm() {
     return {
       name: "",
@@ -128,13 +129,36 @@ export default function JewelleryAdminPanel() {
     setPreviews([...item.images]);
   }
 
-  function handleDelete(id) {
-    if (window.confirm("Delete this item?")) {
-      setInventory(inventory.filter((item) => item._id !== id));
-      if (editingId === id) {
-        setEditingId(null);
-        setFormData(getEmptyForm());
+  async function handleDelete(id) {
+    try {
+      // Show confirmation popup
+      const result = await Swal.fire({
+        title: "Delete product?",
+        text: "This product will be deleted permanently.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#000",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it",
+      });
+
+      // If user confirms deletion
+      if (result.isConfirmed) {
+        try {
+          show(); // show loader
+          const response = await deleteJewellary(id); // API call
+          success("Product deleted successfully"); // success toast
+          fetchJewellery(); // refresh cart or list
+        } catch (e) {
+          console.error(e);
+          error("Something went wrong"); // error toast
+        } finally {
+          hide(); // hide loader
+        }
       }
+    } catch (e) {
+      console.error(e);
+      error("Something went wrong");
     }
   }
 
@@ -242,19 +266,18 @@ export default function JewelleryAdminPanel() {
       const payload = editingId ? buildUpdatePayload() : buildCreatePayload();
       if (editingId) {
         await updateJewellary(editingId, payload);
-        toast.success("Product updated successfully");
+        success("Product updated successfully");
       } else {
         await createJewellary(payload);
-        toast.success("Product added successfully");
+        success("Product added successfully");
       }
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
       const msg =
-        error?.response?.data?.errors?.[0] ||
-        error?.response?.data?.message ||
+        e?.response?.data?.errors?.[0] ||
+        e?.response?.data?.message ||
         "Something went wrong";
 
-      toast.error(msg);
+      error(msg);
     } finally {
       hide();
     }
@@ -313,13 +336,13 @@ export default function JewelleryAdminPanel() {
                   </div>
                 </div>
                 <button
-                  className="text-xs bg-yellow-100 hover:bg-yellow-200 text-yellow-800 px-2 py-1 rounded transition shadow font-bold"
+                  className="text-xs bg-yellow-100 cursor-pointer hover:bg-yellow-200 text-yellow-800 px-2 py-1 rounded transition shadow font-bold"
                   onClick={() => handleEdit(item)}
                 >
                   Edit
                 </button>
                 <button
-                  className="text-xs bg-pink-100 hover:bg-pink-300 text-pink-700 px-2 py-1 rounded transition shadow font-bold"
+                  className="text-xs bg-pink-100 cursor-pointer hover:bg-pink-300 text-pink-700 px-2 py-1 rounded transition shadow font-bold"
                   onClick={() => handleDelete(item._id)}
                 >
                   Delete

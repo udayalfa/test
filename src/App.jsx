@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Necklaces from "./pages/Necklaces";
 import Home from "./pages/Home";
 import TextSlider from "./layout/TextSlider";
-import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
 import { LoaderProvider } from "./context/LoaderContext";
 import Rings from "./pages/Rings";
@@ -20,6 +19,7 @@ import JewelleryAdminPage from "./pages/JewelleryAdminPage";
 import AdminLogin from "./pages/AdminLogin";
 import JewellaryDetail from "./pages/JewelaryDetails";
 import Admin from "./pages/Admin";
+import Layout from "./layout/Layout";
 
 function App() {
   const mockCart = [
@@ -30,7 +30,7 @@ function App() {
     <BrowserRouter>
       <LoaderProvider>
         <TextSlider />
-        <Navbar />
+        <Layout/>
         <ScrollToTop/>
         <Routes>
           <Route path="/" element={<Necklaces />} />

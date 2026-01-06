@@ -1,6 +1,6 @@
 const FeatureSection = () => {
   return (
-    <div className="flex flex-wrap justify-center gap-8 bg-white py-10 px-4 text-center text-gray-900">
+    <div className="flex flex-wrap justify-center gap-8 bg-white mt-5 py-10 px-4 text-center text-gray-900">
       {/* Direct Inquiry */}
       <div className="w-64">
         <div className="mb-2 flex justify-center">

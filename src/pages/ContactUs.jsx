@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { contact } from "../api/contactApi";
-import { toast } from "react-toastify";
 import { useLoader } from "../context/LoaderContext";
+import { useLocation } from "react-router-dom";
+import { error, success } from "../components/UIElement/toastsObj";
 
 const ContactUs = () => {
+  const location = useLocation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -11,20 +13,28 @@ const ContactUs = () => {
     subject: "",
     message: "",
   });
-  const {show,hide} = useLoader()
+  const { show, hide } = useLoader();
+  useEffect(() => {
+    if (location.hash === "#find-us") {
+      const el = document.querySelector(location.hash);
+      const offset = 80; // if you have fixed navbar
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }, [location]);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async () => {
-    show()
-    try{
-      const response = await contact(formData)
-      toast.success("Form Submitted Successfully")
-    }catch(e){
-      toast.error("Something went wrong")
-    }finally{
-      hide()
+    show();
+    try {
+      const response = await contact(formData);
+      success("Form Submitted Successfully");
+    } catch (e) {
+      error("Something went wrong");
+    } finally {
+      hide();
     }
   };
 
@@ -49,11 +59,11 @@ const ContactUs = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-          className="p-10"
+          className="p-10 hidden md:block"
         ></div>
 
         {/* Right Side - Form */}
-        <div  className="space-y-6 p-8 bg-white">
+        <div className="space-y-6 p-8 bg-white">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <label className="block mb-2 font-medium">Name</label>
@@ -130,7 +140,10 @@ const ContactUs = () => {
         </div>
       </div>
       <div>
-        <h1 className="text-4xl sm:text-5xl mt-12 text-center animate-fade-up">
+        <h1
+          id="find-us"
+          className="text-4xl sm:text-5xl mt-12 text-center animate-fade-up"
+        >
           Find Us
         </h1>
         <p className="text-lg text-center text-gray-700 max-w-3xl mx-auto mt-4 animate-fade-in-up">
