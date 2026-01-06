@@ -34,7 +34,7 @@ export default function Filters({
             name="gender"
             value={filters.gender}
             onChange={handleFilterChange}
-            className="w-full border rounded-md p-2"
+            className="w-full custom-select rounded-md p-2"
           >
             <option value="">All</option>
             <option value="Men">Men</option>
@@ -49,7 +49,7 @@ export default function Filters({
             name="metalType"
             value={filters.metalType}
             onChange={handleFilterChange}
-            className="w-full border rounded-md p-2"
+            className="w-full custom-select rounded-md p-2"
           >
             <option value="">All</option>
             <option value="Gold">Gold</option>
@@ -68,7 +68,7 @@ export default function Filters({
             name="purity"
             value={filters.purity}
             onChange={handleFilterChange}
-            className="w-full border rounded-md p-2"
+            className="w-full custom-select rounded-md p-2"
           >
             <option value="">All</option>
             <option value="22K">22K</option>
@@ -84,7 +84,7 @@ export default function Filters({
             name="stoneType"
             value={filters.stoneType}
             onChange={handleFilterChange}
-            className="w-full border rounded-md p-2"
+            className="w-full custom-select rounded-md p-2"
           >
             <option value="">All</option>
             <option value="Diamond">Diamond</option>

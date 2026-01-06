@@ -13,10 +13,10 @@ const Footer = () => {
         <div>
           <h3 className="text-3xl mb-4 ">About Us</h3>
           <p className="text-xl text-gray-800">
-            ABNASH isn’t just crystals, it’s passion poured into every ornament.
-            Our dedicated team of experts, designers, and stylists collaborate
-            meticulously to deliver unparalleled quality and unmatched customer
-            satisfaction.
+            At ABNASH, every piece of jewelry is a labor of love. From concept
+            to creation, our skilled designers and stylists pour passion and
+            precision into each ornament, delivering exceptional quality and a
+            truly unforgettable experience for every customer.
           </p>
         </div>
 

@@ -21,15 +21,11 @@ const BuildYourOwn = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const MAX_FILE_SIZE = 1.5 * 1024 * 1024; // 1.5MB
-  const MAX_DIMENSION = 2000; // 2000px
+  const MAX_FILE_SIZE = 1.5 * 1024 * 1024;
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-
     if (!file) return;
-
-    console.log(file.size / 1024);
     if (file.size > MAX_FILE_SIZE) {
       error("Image size must be less than 1.5MB");
       e.target.value = "";
@@ -44,17 +40,7 @@ const BuildYourOwn = () => {
 
     const img = new Image();
     img.src = URL.createObjectURL(file);
-
     img.onload = () => {
-      const { width, height } = img;
-
-      if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
-        error("Image dimensions must not exceed 2000×2000px");
-        e.target.value = "";
-        URL.revokeObjectURL(img.src);
-        return;
-      }
-
       // ✅ Accept image
       setFormData((prev) => ({ ...prev, image: file }));
 
@@ -217,7 +203,7 @@ const BuildYourOwn = () => {
               className="block w-full text-gray-700 file:rounded-lg file:border file:border-gray-600 file:px-4 file:py-2  transition duration-300 cursor-pointer"
             />
             <p className="text-xs text-gray-500 mt-1">
-              Max 1.5MB • 2000×2000px • JPG / PNG
+              Max 1.5MB • JPG / PNG
             </p>
 
             {imagePreview && (
