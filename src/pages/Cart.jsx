@@ -96,7 +96,7 @@ const CartPage = () => {
           {cartProducts.map((item, index) => (
             <div
               key={index}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white shadow p-4 rounded-md"
+              className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white shadow p-4 rounded-md"
             >
               <div className="flex items-start sm:items-center gap-4">
                 <img
@@ -119,7 +119,7 @@ const CartPage = () => {
 
               <RxCrossCircled
                 onClick={() => handleDelete(item.product._id)}
-                className="self-end sm:self-auto cursor-pointer w-6 h-6 text-gray-700 transition hover:rotate-90 hover:scale-110"
+                className="absolute right-2 top-2 self-end sm:self-auto cursor-pointer w-6 h-6 text-gray-700 transition hover:rotate-90 hover:scale-110"
               />
             </div>
           ))}

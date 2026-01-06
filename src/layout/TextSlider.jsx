@@ -12,11 +12,11 @@ const TextSlider = () => {
   const [index, setIndex] = useState(0);
   const [slide, setSlide] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
     const interval = setInterval(() => {
       setSlide(true);
       setTimeout(() => {
-        console.log("hey");
         setIndex((prev) => (prev + 1) % texts.length);
         setSlide(false);
       }, 200); // Smooth reset transition
@@ -25,18 +25,22 @@ const TextSlider = () => {
   }, [texts.length]);
 
   return (
-    <div className="overflow-hidden flex items-center pr-5 relative py-2 bg-custom-yellow">
+    <div className="relative flex items-center justify-between gap-3 px-3 sm:px-5 py-2 bg-custom-yellow overflow-hidden">
       <h1
-        className={`text-xl transition-transform duration-700 w-full text-center ease-in-out ${
-          slide && "translate-x-full opacity-0"
-        }`}
+        className={`flex-1 text-center text-sm sm:text-base md:text-xl font-medium
+    transition-all duration-700 ease-in-out
+    ${slide ? "translate-x-full opacity-0" : "translate-x-0 opacity-100"}`}
       >
         {texts[index]}
       </h1>
-      <BsBag
+
+      <button
         onClick={() => navigate("/cart")}
-        className="text-xl cursor-pointer"
-      />
+        className="flex-shrink-0 p-2 rounded-full hover:bg-black/10 active:scale-95 transition"
+        aria-label="Go to cart"
+      >
+        <BsBag className="text-lg sm:text-xl md:text-2xl cursor-pointer" />
+      </button>
     </div>
   );
 };

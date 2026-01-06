@@ -45,7 +45,7 @@ function App() {
           <Route path="/contact" element={<ContactUs/>} />
           <Route path="/:id" element={<JewellaryDetail />} />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/build-your-own" element={<BuildYourOwn  />} />
+          <Route path="/build-your-own" element={<BuildYourOwn/>} />
           <Route path="/admin" element={<Admin/>} />
         </Routes>
         <Footer />

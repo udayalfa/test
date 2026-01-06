@@ -11,7 +11,8 @@ const Navbar = () => {
     <nav
       className="
         sticky top-0 z-50
-        flex items-baseline-last justify-between
+        hidden md:flex
+         items-baseline-last justify-between
         px-6 lg:px-8
         py-4
         bg-white
@@ -48,7 +49,9 @@ const Navbar = () => {
                 className={`
                   absolute left-0 -bottom-1 w-full h-0.5 bg-black
                   transition-transform duration-300 origin-left
-                  ${active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}
+                  ${
+                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }
                 `}
               />
             </Link>
@@ -97,7 +100,9 @@ const Navbar = () => {
                 className={`
                   absolute left-0 -bottom-1 w-full h-0.5 bg-black
                   transition-transform duration-300 origin-left
-                  ${active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}
+                  ${
+                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }
                 `}
               />
             </Link>
