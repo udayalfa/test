@@ -40,7 +40,7 @@ const MobileNavbar = () => {
 
       {/* Side Drawer */}
       <div
-        className={`fixed top-0 left-0 h-full w-[75%] max-w-xs bg-white z-50
+        className={`fixed top-0 left-0 h-full w-[65%] max-w-xs bg-white z-50
   transform transition-transform duration-300
   ${open ? "translate-x-0" : "-translate-x-full"}`}
       >
@@ -55,7 +55,10 @@ const MobileNavbar = () => {
               setOpen(false);
             }}
           />
-          <button onClick={() => setOpen(false)} className="text-2xl cursor-pointer">
+          <button
+            onClick={() => setOpen(false)}
+            className="text-xl cursor-pointer"
+          >
             ✕
           </button>
         </div>
@@ -67,10 +70,9 @@ const MobileNavbar = () => {
               key={index}
               to={link.path}
               onClick={() => setOpen(false)}
-              className="group relative w-fit"
+              className="group relative w-full"
             >
               {link.name}
-              <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-black scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </Link>
           ))}
         </div>
