@@ -4,6 +4,7 @@ export const links = [
   { name: "Rings", path: "/rings" },
   { name: "Bracelets", path: "/bracelets" },
   { name: "Anklets", path: "/anklets" },
+  { name: "Pendant", path: "/pendant" },
   { name: "Chains", path: "/chains" },
   { name: "Others", path: "/others" },
   { name: "Build Your Own", path: "/build-your-own" },

@@ -38,14 +38,6 @@ function JewellaryData({ product }) {
       <div className="text-lg sm:text-xl md:text-2xl font-semibold mb-1 flex items-center gap-2">
         <span>{product.weight} gm</span>
       </div>
-
-      {/* Rating */}
-      <div className="flex text-lg sm:text-xl md:text-2xl items-center space-x-1 mb-2 text-yellow-400">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <span key={i}>{i < 5 ? "★" : "☆"}</span>
-        ))}
-      </div>
-
       <p className="text-sm sm:text-base md:text-lg">{product.description}</p>
 
       <div className="my-4 space-y-2 text-sm sm:text-base">

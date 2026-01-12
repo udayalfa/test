@@ -36,6 +36,7 @@ function Rings() {
 
     setFilteredJewellaries(filtered);
   }, [filters, jewellaries]);
+  const isFilterApplied = Object.values(filters).some((value) => value !== "");
   if (error) return <p>{error}</p>;
   return (
     <div className="w-full relative">
@@ -62,8 +63,10 @@ function Rings() {
               <JewelryCard key={jewellary._id} jewellary={jewellary} />
             ))
           ) : (
-            <p className="text-center text-3xl col-span-full text-gray-500 mt-30 mb-50">
-              No rings match the selected filters.
+            <p className="text-center text-3xl col-span-full text-gray-500 mt-20 mb-20">
+              {!isFilterApplied
+                ? "No Ring uploaded yet."
+                : "No rings match the selected filters."}
             </p>
           )}
         </div>

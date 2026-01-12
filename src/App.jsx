@@ -20,6 +20,7 @@ import AdminLogin from "./pages/AdminLogin";
 import JewellaryDetail from "./pages/JewelaryDetails";
 import Admin from "./pages/Admin";
 import Layout from "./layout/Layout";
+import Pendant from "./pages/Pendant";
 
 function App() {
   const mockCart = [
@@ -35,6 +36,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/necklaces" element={<Necklaces />} />
+          <Route path="/pendant" element={<Pendant />} />
           <Route path="/rings" element={<Rings />} />
           <Route path="/bracelets" element={<Bracelets />} />
           <Route path="/earrings" element={<Earrings />} />

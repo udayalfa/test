@@ -33,7 +33,7 @@ const Navbar = () => {
           max-w-[42%]
         "
       >
-        {links.slice(0, 7).map((link, index) => {
+        {links.slice(0, 8).map((link, index) => {
           const active = isActive(link.path);
 
           return (
@@ -84,7 +84,7 @@ const Navbar = () => {
           max-w-[42%]
         "
       >
-        {links.slice(7).map((link, index) => {
+        {links.slice(8).map((link, index) => {
           const active = isActive(link.path);
 
           return (

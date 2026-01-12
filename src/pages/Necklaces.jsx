@@ -37,6 +37,7 @@ function Necklaces() {
     setFilteredJewellaries(filtered);
   }, [filters, jewellaries]);
 
+  const isFilterApplied = Object.values(filters).some((value) => value !== "");
   if (error) return <p>{error}</p>;
 
   return (
@@ -64,15 +65,22 @@ function Necklaces() {
               <JewelryCard key={jewellary._id} jewellary={jewellary} />
             ))
           ) : (
-            <p className="text-center text-3xl col-span-full text-gray-500 mt-30 mb-50">
-              No necklaces match the selected filters.
+            <p className="text-center text-3xl col-span-full text-gray-500 mt-20 mb-20">
+              {!isFilterApplied
+                ? "No Necklace uploaded yet."
+                : "No necklaces match the selected filters."}
             </p>
           )}
         </div>
       </div>
 
       {/* Right Sidebar */}
-     <Filters filters={filters} setFilters={setFilters} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
+      <Filters
+        filters={filters}
+        setFilters={setFilters}
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
 
       {/* Sidebar Overlay */}
       {sidebarOpen && (

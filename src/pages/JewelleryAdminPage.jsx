@@ -390,7 +390,7 @@ export default function JewelleryAdminPanel() {
                 className="w-full h-[150px] px-3 py-2 rounded-lg border transition"
               />
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="md:grid grid-cols-2 gap-2">
               <div>
                 <label className="block text-sm font-semibold mb-1">
                   Gender
@@ -427,7 +427,7 @@ export default function JewelleryAdminPanel() {
                 </select>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="md:grid grid-cols-2 gap-2">
               <div>
                 <label className="block text-sm font-semibold mb-1">
                   Purity
@@ -461,7 +461,7 @@ export default function JewelleryAdminPanel() {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="md:grid grid-cols-2 gap-2">
               <div>
                 <label className="block text-sm font-semibold mb-1">
                   Stone Type
