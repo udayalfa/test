@@ -47,7 +47,8 @@ function JewellaryData({ product }) {
       </div>
 
       <p className="mb-4 text-sm sm:text-base">
-        Hurry! Only <span className="font-bold">{product.stock}</span> left in stock
+        Hurry! Only <span className="font-bold">{product.stock}</span> left in
+        stock
       </p>
 
       <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">

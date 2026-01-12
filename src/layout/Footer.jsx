@@ -104,23 +104,57 @@ const Footer = () => {
 
       {/* Social Icons & Copyright */}
       <div className="mt-12 flex justify-center items-center space-x-4 text-black text-xl select-auto">
-        {/* You can replace these with icons from react-icons or heroicons */}
-        <img
-          src="/img/instagram.svg"
-          className="w-7 h-7 cursor-pointer"
-          alt=""
-        />
-        <img
-          src="/img/whatsapp.svg"
-          className="w-6 h-6 cursor-pointer"
-          alt=""
-        />
-        <img
-          src="/img/facebook.svg"
-          className="w-6 h-6 cursor-pointer"
-          alt=""
-        />
-        <img src="/img/twitter.svg" className="w-5 h-5 cursor-pointer" alt="" />
+        <a
+          href="https://www.instagram.com/abnash_jewellers?igsh=ODhscjdsMzF4emZs&utm_source=qr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <img
+            src="/img/instagram.svg"
+            className="w-7 h-7 cursor-pointer hover:scale-110 transition"
+            alt="Instagram"
+          />
+        </a>
+
+        <a
+          href="https://wa.me/15069888000"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+        >
+          <img
+            src="/img/whatsapp.svg"
+            className="w-6 h-6 cursor-pointer hover:scale-110 transition"
+            alt="WhatsApp"
+          />
+        </a>
+
+        <a
+          href="https://www.facebook.com/your_page_name"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+        >
+          <img
+            src="/img/facebook.svg"
+            className="w-6 h-6 cursor-pointer hover:scale-110 transition"
+            alt="Facebook"
+          />
+        </a>
+
+        <a
+          href="https://twitter.com/your_username"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Twitter"
+        >
+          <img
+            src="/img/twitter.svg"
+            className="w-5 h-5 cursor-pointer hover:scale-110 transition"
+            alt="Twitter"
+          />
+        </a>
       </div>
 
       <p className="text-center text-xs text-gray-600 mt-6 select-none">
