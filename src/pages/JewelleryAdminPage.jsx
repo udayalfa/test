@@ -29,7 +29,7 @@ const metalTypes = [
   "Other",
 ];
 
-const purity = ["22K", "18K", "925 Silver"];
+const purity = ["22K", "18K", "925 Silver", "14K", "18 & 22K"];
 const stoneType = ["Diamond", "Ruby", "Emerald", "Kundan", "Others"];
 
 export default function JewelleryAdminPanel() {
@@ -65,14 +65,10 @@ export default function JewelleryAdminPanel() {
       metalType: "",
       category: "",
       purity: "",
-      weight: "",
       stoneType: "",
       images: [],
-      stock: 1,
     };
   }
-  console.log(formData);
-
   function handleCatChange(e) {
     setSelectedCat(e.target.value);
   }
@@ -427,7 +423,7 @@ export default function JewelleryAdminPanel() {
                 </select>
               </div>
             </div>
-            <div className="md:grid grid-cols-2 gap-2">
+            <div className="md:grid grid-cols-1 gap-2">
               <div>
                 <label className="block text-sm font-semibold mb-1">
                   Purity
@@ -447,19 +443,7 @@ export default function JewelleryAdminPanel() {
                   ))}
                 </select>
               </div>
-              <div>
-                <label className="block text-sm font-semibold mb-1">
-                  Weight
-                </label>
-                <input
-                  name="weight"
-                  value={formData.weight}
-                  onChange={handleChange}
-                  type="number"
-                  placeholder="e.g. 13g"
-                  className="w-full px-3 py-2 rounded-lg border focus:ring ring-pink-300 transition"
-                />
-              </div>
+              
             </div>
             <div className="md:grid grid-cols-2 gap-2">
               <div>
@@ -549,18 +533,6 @@ export default function JewelleryAdminPanel() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold mb-1">Stock</label>
-              <input
-                name="stock"
-                value={formData.stock}
-                onChange={handleChange}
-                type="number"
-                min={1}
-                className="w-full px-3 py-2 rounded-lg border focus:ring transition"
-              />
             </div>
             <div className="flex gap-3 mt-4 items-center">
               <button

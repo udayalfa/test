@@ -105,7 +105,7 @@ const Footer = () => {
       {/* Social Icons & Copyright */}
       <div className="mt-12 flex justify-center items-center space-x-4 text-black text-xl select-auto">
         <a
-          href="https://www.instagram.com/abnash_jewellers?igsh=ODhscjdsMzF4emZs&utm_source=qr"
+          href="https://www.instagram.com/abnash_jeweller?igsh=ODhscjdsMzF4emZs&utm_source=qr"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Instagram"

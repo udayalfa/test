@@ -74,6 +74,8 @@ export default function Filters({
             <option value="22K">22K</option>
             <option value="18K">18K</option>
             <option value="925 Silver">925 Silver</option>
+            <option value="14K">14K</option>
+            <option value="18 & 22K">18 & 22K</option>
           </select>
         </div>
 

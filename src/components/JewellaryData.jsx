@@ -6,7 +6,7 @@ function JewellaryData({ product }) {
 
   if (!product) return null;
 
-  const incrementQty = () => setQuantity((q) => Math.min(q + 1, product.stock));
+  const incrementQty = () => setQuantity((q) => q+1);
   const decrementQty = () => setQuantity((q) => Math.max(q - 1, 1));
 
   const cartHandler = () => {
@@ -15,7 +15,7 @@ function JewellaryData({ product }) {
 
     if (index !== -1) {
       const prevQuantity = existingCart[index].totalItems;
-      if (prevQuantity === quantity) {
+      if (prevQuantity === quantity) {  
         info("Product already in cart");
         return;
       }
@@ -35,10 +35,9 @@ function JewellaryData({ product }) {
         {product.name} ({product.shortDescription})
       </h1>
 
-      <div className="text-lg sm:text-xl md:text-2xl font-semibold mb-1 flex items-center gap-2">
-        <span>{product.weight} gm</span>
-      </div>
-      <p className="text-sm sm:text-base md:text-lg">{product.description}</p>
+      <p className="text-sm mt-4 sm:text-base md:text-lg">
+        {product.description}
+      </p>
 
       <div className="my-4 space-y-2 text-sm sm:text-base">
         <p>All India and Canada Delivery Within {product.deliveryDays} Days</p>
@@ -46,12 +45,7 @@ function JewellaryData({ product }) {
         <p>ISO 9001:2015 Certified Premium Quality</p>
       </div>
 
-      <p className="mb-4 text-sm sm:text-base">
-        Hurry! Only <span className="font-bold">{product.stock}</span> left in
-        stock
-      </p>
-
-      <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div className="my-6  flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <div className="flex items-center border w-24 sm:w-28 justify-between">
           <button
             onClick={decrementQty}
@@ -64,7 +58,6 @@ function JewellaryData({ product }) {
           <button
             onClick={incrementQty}
             className="px-3 py-1 cursor-pointer text-xl sm:text-2xl font-bold"
-            disabled={quantity >= product.stock}
           >
             +
           </button>
@@ -88,7 +81,7 @@ function JewellaryData({ product }) {
               alt={method}
               className="w-10 h-10 sm:w-[5.5vw] sm:h-[5.5vw]"
             />
-          )
+          ),
         )}
       </div>
     </div>

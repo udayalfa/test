@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const TextSlider = () => {
   const texts = [
-    "Proudly made in India 🇮🇳✨",
     "100% customer satisfaction✨",
     "All India and Canada Support 9888471818",
     "FREE Shipping On Gold✨",

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { links } from "../utils/navLinks";
+import { IoDiamond } from "react-icons/io5";
 
 const MobileNavbar = () => {
   const [open, setOpen] = useState(false);
@@ -22,12 +23,22 @@ const MobileNavbar = () => {
         </button>
 
         {/* Logo */}
-        <img
-          src="/img/logo.svg"
-          alt="Logo"
-          className="w-[40vw] cursor-pointer"
+        <div
           onClick={() => navigate("/")}
-        />
+          className="
+                  cursor-pointer
+                  flex items-center gap-3
+                  select-none
+                "
+        >
+          <IoDiamond className="w-9 h-9 text-[#B9F2FF]" />
+          <h1 className="text-3xl font-serif tracking-[0.25em] text-gray-900">
+            ABNASH
+            <span className="block text-sm tracking-widest text-gray-600 text-center">
+              JEWELLERS
+            </span>
+          </h1>
+        </div>
       </nav>
 
       {/* Overlay */}

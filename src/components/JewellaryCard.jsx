@@ -41,10 +41,6 @@ function JewelryCard({ jewellary }) {
         <p className="text-sm md:text-base text-gray-600 line-clamp-2 mb-2">
           {jewellary?.shortDescription}
         </p>
-
-        <span className="text-base md:text-lg lg:text-xl font-bold">
-          {jewellary?.weight}g
-        </span>
       </div>
     </div>
   );

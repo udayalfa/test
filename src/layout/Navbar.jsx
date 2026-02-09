@@ -1,5 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { links } from "../utils/navLinks";
+import { GiDiamondRing, GiTrophy } from "react-icons/gi";
+import { IoDiamond } from "react-icons/io5";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -62,13 +64,19 @@ const Navbar = () => {
       {/* LOGO */}
       <div
         onClick={() => navigate("/")}
-        className="cursor-pointer flex-shrink-0 mx-4"
+        className="
+          cursor-pointer
+          flex items-center gap-3
+          select-none
+        "
       >
-        <img
-          src="/img/logo.svg"
-          alt="Logo"
-          className="w-[clamp(155px,16vw,240px)] transition-all"
-        />
+        <IoDiamond   className="w-9 h-9 text-[#B9F2FF]" />
+        <h1 className="text-3xl font-serif tracking-[0.25em] text-gray-900">
+          ABNASH
+          <span className="block text-sm tracking-widest text-gray-600 text-center">
+            JEWELLERS
+          </span>
+        </h1>
       </div>
 
       {/* RIGHT LINKS */}
