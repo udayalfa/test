@@ -131,7 +131,7 @@ const Footer = () => {
         </a>
 
         <a
-          href="https://www.facebook.com/your_page_name"
+          href="https://www.facebook.com/AbnashJewellers"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Facebook"
