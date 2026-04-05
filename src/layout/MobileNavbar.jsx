@@ -57,15 +57,17 @@ const MobileNavbar = () => {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b">
-          <img
-            src="/img/logo.svg"
-            alt="Logo"
-            className="w-32 cursor-pointer"
-            onClick={() => {
-              navigate("/");
-              setOpen(false);
-            }}
-          />
+          <div className="flex items-center gap-2">
+          <IoDiamond className="w-8 h-8 lg:w-9 lg:h-9 text-[#B9F2FF]" />
+        <h1 className="text-xl lg:text-3xl font-serif tracking-[0.2em] text-gray-900">
+          ABNASH
+          <span className="block text-xs lg:text-sm tracking-widest text-gray-600 text-center">
+            JEWELLERS
+          </span>
+        </h1>
+          </div>
+          
+          
           <button
             onClick={() => setOpen(false)}
             className="text-xl cursor-pointer"
