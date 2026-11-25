@@ -104,7 +104,6 @@ const ContactUs = () => {
               className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-transparent outline-none transition duration-300"
             />
           </div>
-
           <div>
             <label className="block mb-2 font-medium">Subject</label>
             <input
@@ -147,12 +146,13 @@ const ContactUs = () => {
           Find Us
         </h1>
         <p className="text-lg text-center text-gray-700 max-w-3xl mx-auto mt-4 animate-fade-in-up">
-          Located in the heart of Sri Muktsar Sahib, Abnash Jewellers welcomes
-          you to experience a legacy of elegance and trust. Visit our store to
-          explore timeless collections of gold, silver, and diamond jewelry
-          crafted with care and tradition. Whether you're celebrating a special
-          moment or creating one, our doors are always open to help you shine
-          brighter.
+          Located in the heart of Sri Muktsar Sahib, Jagdish Kirpan Store
+          proudly welcomes you to a legacy of craftsmanship and recognition.
+          Visit our store to explore an exclusive collection of trophies,
+          medals, mementos, shields, and awards—thoughtfully designed to honor
+          achievement and excellence. Whether you’re celebrating a victory,
+          milestone, or special occasion, our doors are always open to help you
+          commemorate success with pride.
         </p>
       </div>
 
@@ -160,12 +160,11 @@ const ContactUs = () => {
       <div className="w-full max-w-6xl mt-12 rounded-2xl overflow-hidden shadow-2xl border border-[var(--custom-yellow)] animate-fade-in-up">
         <iframe
           title="Abnash Jewellers Location"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3268.510961776076!2d74.50897808146523!3d30.47427570950142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39176979815fbeb1%3A0xa08fdfd7c6c9a600!2sAbnash%20Jewellers!5e1!3m2!1sen!2sin!4v1761337389085!5m2!1sen!2sin"
-          width="100%"
-          height="500"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3438.617790032265!2d74.51177267536248!3d30.475262174709478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3917690ec6d6224f%3A0x5792950304641183!2sJAGDISH%20KIRPAN%20STORE!5e0!3m2!1sen!2sin!4v1767990518050!5m2!1sen!2sin"
           style={{ border: 0 }}
           allowFullScreen=""
           loading="lazy"
+          className="w-[100%] h-[400px] md:h-[600px]"
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>

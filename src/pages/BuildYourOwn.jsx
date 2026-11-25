@@ -5,6 +5,15 @@ import toast from "react-hot-toast";
 import { error, success } from "../components/UIElement/toastsObj";
 
 const BuildYourOwn = () => {
+  const categories = [
+    "Trophies",
+    "Awards",
+    "Medals",
+    "Shields",
+    "Mementos",
+    "Corporate Gifts",
+    "Sports Accessories",
+  ];
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -78,10 +87,10 @@ const BuildYourOwn = () => {
       }}
     >
       {/* Overlay */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-30 z-0"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40 z-0"></div>
 
       {/* Content - form container */}
-      <div className="relative z-10 max-w-4xl w-full bg-white/50 bg-opacity-90 rounded-3xl shadow-2xl p-10 animate-fade-in-up">
+      <div className="relative z-10 max-w-4xl w-full bg-white/75 rounded-3xl shadow-2xl p-10 animate-fade-in-up">
         <header className="text-center mb-8 sm:mb-10 lg:mb-14 px-4">
           <h1
             className="
@@ -95,7 +104,7 @@ const BuildYourOwn = () => {
       xl:text-6xl
     "
           >
-            Build Your Own Jewelry
+            Build Your Own Awards & Trophies
           </h1>
 
           <p
@@ -112,8 +121,8 @@ const BuildYourOwn = () => {
       leading-relaxed
     "
           >
-            Share your vision! Upload an image or describe the jewelry you want
-            to create, and our artisans will bring it to life.
+            Share your vision! Upload an image or describe the recognition items
+            you want to create, and our artisans will bring it to life.
           </p>
         </header>
 
@@ -161,20 +170,18 @@ const BuildYourOwn = () => {
             </div>
 
             <div>
-              <label className="block mb-2 font-medium">Type of Jewelry</label>
+              <label className="block mb-2 font-medium">Type of Items</label>
               <select
                 name="jewelryType"
                 required
                 value={formData.jewelryType}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg border border-gray-600 focus:border-custom-yellow focus:ring-2 focus:ring-custom-yellow outline-none transition duration-300"
+                className="w-full cursor-pointer px-4 py-3 rounded-lg border border-gray-600 focus:border-custom-yellow focus:ring-2 focus:ring-custom-yellow outline-none transition duration-300"
               >
                 <option value="">Select type</option>
-                <option value="Ring">Ring</option>
-                <option value="Necklace">Necklace</option>
-                <option value="Bracelet">Bracelet</option>
-                <option value="Earrings">Earrings</option>
-                <option value="Custom">Custom</option>
+                {categories.map((category) => {
+                  return <option value={category}>{category}</option>;
+                })}
               </select>
             </div>
           </div>
@@ -202,9 +209,7 @@ const BuildYourOwn = () => {
               onChange={handleImageChange}
               className="block w-full text-gray-700 file:rounded-lg file:border file:border-gray-600 file:px-4 file:py-2  transition duration-300 cursor-pointer"
             />
-            <p className="text-xs text-gray-500 mt-1">
-              Max 1.5MB • JPG / PNG
-            </p>
+            <p className="text-xs text-gray-500 mt-1">Max 1.5MB • JPG / PNG</p>
 
             {imagePreview && (
               <img

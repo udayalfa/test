@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { info, success } from "./UIElement/toastsObj";
 
-function JewellaryData({ product }) {
+function TrophyData({ product }) {
   const [quantity, setQuantity] = useState(1);
 
   if (!product) return null;
@@ -36,7 +36,7 @@ function JewellaryData({ product }) {
       </h1>
 
       <div className="text-lg sm:text-xl md:text-2xl font-semibold mb-1 flex items-center gap-2">
-        <span>{product.weight} gm</span>
+        <span>{product.height} inches</span>
       </div>
 
       {/* Rating */}
@@ -49,8 +49,7 @@ function JewellaryData({ product }) {
       <p className="text-sm sm:text-base md:text-lg">{product.description}</p>
 
       <div className="my-4 space-y-2 text-sm sm:text-base">
-        <p>All India and Canada Delivery Within {product.deliveryDays} Days</p>
-        <p>FREE Shipping On Gold Products</p>
+        <p>All India Delivery Within {product.deliveryDays} Days</p>
         <p>ISO 9001:2015 Certified Premium Quality</p>
       </div>
 
@@ -102,4 +101,4 @@ function JewellaryData({ product }) {
   );
 }
 
-export default JewellaryData;
+export default TrophyData;

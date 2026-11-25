@@ -1,17 +1,18 @@
 import useAuth from "../hooks/useAuth";
 import AdminLogin from "./AdminLogin";
-import JewelleryAdminPanel from "./JewelleryAdminPage";
+import TrophyAdminPanel from "./TrophyAdminPanel";
+
 
 export default function Admin() {
   const {isAuthenticated, user , setIsAuthenticated,setUser } = useAuth();
   
   return (
     <>
-      {isAuthenticated && user?.role == "admin" ? (
-        <JewelleryAdminPanel />
+        <TrophyAdminPanel />
+      {/* {isAuthenticated && user?.role == "admin" ? (
       ) : (
         <AdminLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
-      )}
+      )} */}
     </>
   );
 }

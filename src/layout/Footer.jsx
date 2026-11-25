@@ -1,100 +1,103 @@
 import React from "react";
 import { links } from "../utils/navLinks";
 import { Link, useNavigate } from "react-router-dom";
-import { FaPhone, FaPhoneAlt } from "react-icons/fa";
+import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   const navigate = useNavigate();
+
   return (
-    <footer className="bg-custom-yellow py-12 px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-12">
-        {/* About Us */}
+    <footer className="bg-custom-yellow text-gray-900">
+      {/* Top Section */}
+      <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-3 gap-12">
+        
+        {/* About */}
         <div>
-          <h3 className="text-3xl mb-4 ">About Us</h3>
-          <p className="text-xl text-gray-800">
-            At ABNASH, every piece of jewelry is a labor of love. From concept
-            to creation, our skilled designers and stylists pour passion and
-            precision into each ornament, delivering exceptional quality and a
-            truly unforgettable experience for every customer.
+          <h3 className="text-2xl font-semibold mb-4 relative after:block after:w-12 after:h-1 after:bg-black after:mt-2">
+            About Us
+          </h3>
+          <p className="text-base leading-relaxed text-gray-800">
+            At <span className="font-semibold">Jagdish</span>, every creation is
+            crafted with pride and purpose. Our skilled craftsmen and designers
+            bring precision, passion, and attention to detail into every trophy,
+            award, medal, and memento.
           </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-3xl">Quick Links</h3>
-          <ul className="text-xl space-y-2 mt-5 cursor-pointer">
+          <h3 className="text-2xl font-semibold mb-4 relative after:block after:w-12 after:h-1 after:bg-black after:mt-2">
+            Quick Links
+          </h3>
+          <ul className="space-y-3 text-base">
             {links.map((link) => (
-              <div>
+              <li key={link.name}>
                 <Link
                   to={link.path}
-                  key={link.name}
-                  className="hover:underline"
+                  className="hover:translate-x-1 inline-block transition-all duration-200 hover:underline"
                 >
                   {link.name}
                 </Link>
-              </div>
+              </li>
             ))}
           </ul>
         </div>
+
+        {/* Contact */}
         <div>
-          <h1 className="text-3xl">Contact Us</h1>
-          <div className="text-xl space-y-3 mt-5 text-gray-700">
-            <p>Have a question or a custom jewelry idea?</p>
-            <p>We’re here to help with orders, designs, and inquiries.</p>
-            <p>Expect a response from our team within 24 hours.</p>
+          <h3 className="text-2xl font-semibold mb-4 relative after:block after:w-12 after:h-1 after:bg-black after:mt-2">
+            Contact Us
+          </h3>
 
-            <div className="pt-3 space-y-2">
-              {/* Canada */}
-              <div className="flex items-center space-x-2">
-                <FaPhoneAlt />
-                <span className="text-lg">🇨🇦</span>
-                {/* <span>Phone:</span> */}
-                <a
-                  href="tel:+15069888000"
-                  className="font-medium text-black hover:underline"
-                >
-                  +1 (506) 988-8000
-                </a>
-              </div>
+          <p className="text-base text-gray-700 mb-4">
+            Have a question or a custom trophy idea?  
+            Our team usually responds within 24 hours.
+          </p>
 
-              {/* India */}
-              <div className="flex items-center space-x-2">
-                <FaPhoneAlt />
-                <span className="text-lg">🇮🇳</span>
-                {/* <span>Phone:</span> */}
-                <a
-                  href="tel:+919888471818"
-                  className="font-medium text-black hover:underline"
-                >
-                  +91 98884 71818
-                </a>
-              </div>
+          <div className="space-y-3 text-base">
+            <div className="flex items-center gap-3">
+              <FaPhoneAlt />
+              <a
+                href="tel:+918360669121"
+                className="hover:underline font-medium"
+              >
+                +91 83606 69121
+              </a>
+            </div>
+            <div className="flex items-center gap-3">
+              <FaPhoneAlt />
+              <a
+                href="tel:+919814772525"
+                className="hover:underline font-medium"
+              >
+                +91 98147 72525
+              </a>
+            </div>
+            
 
-              {/* Email */}
-              <div className="flex items-center space-x-2">
-                <MdEmail />
-                <span>Email:</span>
-                <a
-                  href="mailto:Abnashsoni@gmail.com"
-                  className="font-medium text-black hover:underline"
-                >
-                  Abnashsoni@gmail.com
-                </a>
-              </div>
+            <div className="flex items-center gap-3">
+              <MdEmail />
+              <a
+                href="mailto:Karankathuriaedu91@gmail.com"
+                className="hover:underline font-medium break-all"
+              >
+                Karankathuriaedu91@gmail.com
+              </a>
             </div>
           </div>
 
-          <div className="mt-4 flex justify-around">
+          {/* Buttons */}
+          <div className="mt-6 flex flex-col sm:flex-row gap-4">
             <button
               onClick={() => navigate("/contact")}
-              className="border rounded-md px-8 py-3 font-semibold hover:bg-gray-900 hover:text-white cursor-pointer transition"
+              className="border cursor-pointer border-black px-6 py-3 rounded-md font-semibold hover:bg-black hover:text-white transition"
             >
               Contact Us
             </button>
             <button
               onClick={() => navigate("/contact#find-us")}
-              className="border rounded-md px-8 py-3 font-semibold hover:bg-gray-900 hover:text-white cursor-pointer transition"
+              className="border cursor-pointer border-black px-6 py-3 rounded-md font-semibold hover:bg-black hover:text-white transition"
             >
               Find a Store
             </button>
@@ -102,30 +105,25 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Social Icons & Copyright */}
-      <div className="mt-12 flex justify-center items-center space-x-4 text-black text-xl select-auto">
-        {/* You can replace these with icons from react-icons or heroicons */}
-        <img
-          src="/img/instagram.svg"
-          className="w-7 h-7 cursor-pointer"
-          alt=""
-        />
-        <img
-          src="/img/whatsapp.svg"
-          className="w-6 h-6 cursor-pointer"
-          alt=""
-        />
-        <img
-          src="/img/facebook.svg"
-          className="w-6 h-6 cursor-pointer"
-          alt=""
-        />
-        <img src="/img/twitter.svg" className="w-5 h-5 cursor-pointer" alt="" />
-      </div>
+      {/* Divider */}
+      <div className="border-t border-black/20" />
 
-      <p className="text-center text-xs text-gray-600 mt-6 select-none">
-        Copyright © 2025 Abnash Jewellers. All rights reserved.
-      </p>
+      {/* Bottom Section */}
+      <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        {/* Social Icons */}
+        <div className="flex gap-5">
+          <img src="/img/instagram.svg" className="w-6 hover:scale-110 transition cursor-pointer" alt="Instagram" />
+          <img src="/img/whatsapp.svg" className="w-6 hover:scale-110 transition cursor-pointer" alt="WhatsApp" />
+          <img src="/img/facebook.svg" className="w-6 hover:scale-110 transition cursor-pointer" alt="Facebook" />
+          <img src="/img/twitter.svg" className="w-5 hover:scale-110 transition cursor-pointer" alt="Twitter" />
+        </div>
+
+        {/* Copyright */}
+        <p className="text-xs text-gray-700 text-center">
+          © 2025 Jagdish Industries. All rights reserved.
+        </p>
+      </div>
     </footer>
   );
 };

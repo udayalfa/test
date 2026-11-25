@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import JewelryCard from "../components/JewellaryCard";
-import { getHomeJewellery } from "../api/jewellaryApi";
+import JewelryCard from "../components/TrophyCard";
 import { useLoader } from "../context/LoaderContext";
 import { error } from "../components/UIElement/toastsObj";
+import { getHomeTrophy } from "../api/jewellaryApi";
+import TrophyCard from "../components/TrophyCard";
 
 function Home() {
   const [jewellaries, setJewellaries] = useState([]);
   const { show, hide } = useLoader();
-
+  console.log(jewellaries, "jewellaries");
   useEffect(() => {
     const api = async () => {
       try {
         show();
-        const { data } = await getHomeJewellery();
+        const { data } = await getHomeTrophy();
         setJewellaries(data);
       } catch (e) {
         error("Something went wrong");
@@ -45,7 +46,8 @@ function Home() {
           Crafted to Shine ✨
         </h1>
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm sm:text-base animate-fade-in delay-200">
-          Discover a refined selection of fine jewelry, thoughtfully refreshed just for you.
+          Discover a refined selection of fine jewelry, thoughtfully refreshed
+          just for you.
         </p>
       </div>
 
@@ -72,13 +74,13 @@ function Home() {
               lg:gap-8
             "
           >
-            {jewellaries.map((jewellary, index) => (
+            {jewellaries.map((trophy, index) => (
               <div
-                key={jewellary._id}
+                key={trophy._id}
                 className="animate-float"
                 style={{ animationDelay: `${index * 120}ms` }}
               >
-                <JewelryCard jewellary={jewellary} />
+                <TrophyCard trophy={trophy} />
               </div>
             ))}
           </div>

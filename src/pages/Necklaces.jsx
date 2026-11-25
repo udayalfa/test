@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import JewelryCard from "../components/JewellaryCard";
+import JewelryCard from "../components/TrophyCard";
 import useJewelleryByCategory from "../hooks/useJewelleryByCategory";
 import { FiFilter } from "react-icons/fi";
 import Filters from "../components/UIElement/Filters";
 
 function Necklaces() {
-  const { jewellaries, error } = useJewelleryByCategory("Necklace");
+  const { jewellaries, error } = useJewelleryByCategory("Trophies");
   const [filteredJewellaries, setFilteredJewellaries] = useState([]);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);

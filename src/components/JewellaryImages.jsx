@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ImageModal from "./ImageModal";
 
-function JewellaryImages({ product, current, setCurrent, handleThumbnailClick }) {
+function TrophyImages({ product, current, setCurrent, handleThumbnailClick }) {
   const [showModal, setShowModal] = useState(false);
 
   if (!product) return null;
@@ -73,4 +73,4 @@ function JewellaryImages({ product, current, setCurrent, handleThumbnailClick })
   );
 }
 
-export default JewellaryImages;
+export default TrophyImages;

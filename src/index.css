@@ -175,7 +175,7 @@ select:-webkit-autofill:focus {
 
 
 @theme{
- --color-custom-yellow: #F0EEE4;
+ --color-custom-yellow: #fbf6f0;
 }
 /* Classic custom scrollbar */
 .custom-scrollbar {

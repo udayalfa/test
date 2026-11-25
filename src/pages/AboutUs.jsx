@@ -1,88 +1,100 @@
 const AboutUs = () => {
   return (
     <div className="w-full text-gray-800 overflow-hidden">
-      {/* Hero Section */}
-      <section className="text-center py-20 animate-fade-in">
-        <h1 className="text-4xl sm:text-5xl font-serif mb-4">
-          Our Legacy of Trust & Craftsmanship
+
+      {/* HERO */}
+      <section className="text-center py-20 px-6 bg-white animate-fade-in">
+        <h1 className="text-4xl sm:text-5xl font-bold mb-5">
+          Celebrating Excellence with Every Award
         </h1>
-        <p className="text-lg max-w-2xl mx-auto text-gray-600">
-          From humble beginnings in 1974 to an enduring legacy at Abnash Jewellers — where every piece tells a story of devotion, integrity, and excellence in jewelry craftsmanship.
+        <p className="text-lg max-w-3xl mx-auto text-gray-600">
+          Jagdish Industries is a trusted name in trophies, medals, shields,
+          and customized awards — proudly honoring achievements for generations.
         </p>
       </section>
 
-      {/* Gen 1 – Founding Era */}
-      <section className="flex bg-custom-yellow flex-col md:flex-row items-center justify-between gap-10 px-6 md:px-24 py-16 animate-fade-in-up">
-        <div className="w-full md:w-[40%] overflow-hidden rounded-2xl shadow-lg">
-          <img
-            src="/img/gen1.png"
-            alt="Founding Era"
-            className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
-          />
-        </div>
-
-        <div className="w-full md:w-[60%] text-left md:pl-10">
-          <h2 className="text-3xl sm:text-4xl font-serif mb-4">
-            The Beginning – Gurdev Singh (1974)
-          </h2>
-          <p className="text-lg text-gray-700 leading-relaxed">
-            The story of Abnash Jewellers began with the vision and craftsmanship of
-            **Sardar Gurdev Singh**, a man dedicated to creating jewelry that stood
-            for integrity and artistry. Founded in 1974 at Gandhi Chowk, Sri Muktsar
-            Sahib, his work quickly became known for fine quality and trust within
-            the community.
-          </p>
-        </div>
-      </section>
-
-      {/* Gen 2 – Present Era */}
-      <section className="flex bg-custom-yellow  flex-col md:flex-row-reverse items-center justify-between gap-10 px-6 md:px-24 py-16 animate-fade-in-up">
-        <div className="w-full md:w-[40%] overflow-hidden rounded-2xl shadow-lg">
-          <img
-            src="/img/gen2.png"
-            alt="Current Generation"
-            className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
-          />
-        </div>
-
-        <div className="w-full md:w-[60%] text-left md:pr-10">
-          <h2 className="text-3xl sm:text-4xl font-serif mb-4">
-            Continuing the Legacy – Abnash Singh
-          </h2>
-          <p className="text-lg text-gray-700 leading-relaxed">
-            Today, under the leadership of **Mr. Abnash Singh**, the brand proudly
-            carries forward its legacy. From traditional to modern designs, the
-            boutique continues to symbolize honesty, artistry, and family heritage.
-            Moving to our new home near Naka No. 6, Opp. Pandit Jai Dayal Street, we
-            serve customers with the same principles of transparency and excellence
-            that shaped our beginning.
-          </p>
-        </div>
-      </section>
-
-      {/* Our Story */}
-      <section className="px-6 md:px-28 py-16 bg-gray-50 animate-fade-in">
-        <h2 className="text-3xl sm:text-4xl font-serif mb-6 text-center">
-          About Us
+      {/* PRODUCTS PREVIEW */}
+      <section className="bg-custom-yellow py-16 px-6">
+        <h2 className="text-3xl font-semibold text-center mb-10">
+          Our Signature Creations
         </h2>
-        <p className="text-lg leading-relaxed max-w-3xl mx-auto text-center text-gray-700">
-          Abnash Jewellers is a trusted destination for gold, silver, diamond, and
-          custom jewelry that celebrates timeless beauty. Every design reflects
-          our promise to create meaningful, lasting pieces that mark life's most
-          precious moments — built on a foundation of trust, detail, and heart.
+
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { title: "Trophies", img: "/img/trophy.png" },
+            { title: "Medals", img: "/img/medal.png" },
+            { title: "Shields", img: "/img/shield.png" },
+            { title: "Awards", img: "/img/award.png" },
+          ].map((item) => (
+            <div
+              key={item.title}
+              className="bg-white rounded-xl shadow-md overflow-hidden text-center hover:shadow-xl transition"
+            >
+              <img
+                src={item.img}
+                alt={item.title}
+                className="w-full h-40 object-contain p-4"
+              />
+              <h3 className="py-3 font-semibold">{item.title}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FAMILY / LEGACY */}
+      <section className="flex flex-col md:flex-row items-center gap-12 px-6 md:px-24 py-20 bg-white">
+        <div className="md:w-1/2 overflow-hidden rounded-2xl shadow-lg">
+          <img
+            src="/img/family.png"
+            alt="Jagdish Industries Family"
+            className="w-full h-auto object-cover hover:scale-105 transition duration-500"
+          />
+        </div>
+
+        <div className="md:w-1/2">
+          <h2 className="text-3xl font-semibold mb-4">
+            A Legacy Built on Trust & Craftsmanship
+          </h2>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            Jagdish Industries began as a small family-run workshop and has grown
+            into a respected name in trophies and awards. Our journey is rooted
+            in honesty, skilled craftsmanship, and long-standing relationships
+            with schools, institutions, and organizations.
+          </p>
+        </div>
+      </section>
+
+      {/* MISSION & VALUES */}
+      <section className="bg-gray-50 py-16 px-6 text-center">
+        <h2 className="text-3xl font-semibold mb-6">Our Mission & Values</h2>
+        <p className="text-lg max-w-3xl mx-auto text-gray-700 leading-relaxed">
+          Our mission is simple — to honor achievements with products that
+          reflect pride, quality, and meaning. We value precision, commitment,
+          transparency, and customer satisfaction in every piece we create.
         </p>
       </section>
 
-      {/* Mission & Values */}
-      <section className="px-6 md:px-28 py-16 bg-white text-center animate-fade-in">
-        <h2 className="text-3xl sm:text-4xl font-serif mb-6">Our Mission & Values</h2>
-        <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
-          Our mission is to combine heritage with modern design, blending
-          craftsmanship and creativity to craft jewelry that tells every
-          family's story. Built on trust, transparency, and authenticity, our
-          creations reflect both emotional and artistic value for generations
-          to come.
-        </p>
+      {/* WHY CHOOSE US */}
+      <section className="py-16 px-6 bg-white">
+        <h2 className="text-3xl font-semibold text-center mb-10">
+          Why Choose Jagdish Industries
+        </h2>
+
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {[
+            "Decades of Experience",
+            "Premium Quality Materials",
+            "Custom Designs Available",
+            "Trusted by Institutions",
+          ].map((point) => (
+            <div
+              key={point}
+              className="p-6 rounded-xl border hover:shadow-md transition"
+            >
+              <p className="font-medium">{point}</p>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );

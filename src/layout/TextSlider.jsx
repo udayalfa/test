@@ -6,8 +6,7 @@ const TextSlider = () => {
   const texts = [
     "Proudly made in India 🇮🇳✨",
     "100% customer satisfaction✨",
-    "All India and Canada Support 9888471818",
-    "FREE Shipping On Gold✨",
+    "All India Support 83606 69121",
     "ISO Certified Premium Quality✨",
   ];
   const [index, setIndex] = useState(0);

@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useLoader } from "../context/LoaderContext";
-import { getJewellaryByCategory } from "../api/jewellaryApi";
+import { getTrophyByCategory } from "../api/jewellaryApi";
 
-const useJewelleryByCategory = (category) => {
+const useTrophyByCategory = (category) => {
   const { show, hide } = useLoader();
-  const [jewellaries, setJewellaries] = useState([]);
+  const [trophies, setTrophies] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!category) return;
 
-    const fetchJewellery = async () => { 
+    const fetchTrophies = async () => { 
       try {
         show();
-        const { data } = await getJewellaryByCategory(category);
-        setJewellaries(data.jewellery || data);
+        const { data } = await getTrophyByCategory(category);
+        setTrophies(data);
       } catch (err) {
         setError("Failed to load jewellery");
       } finally {
@@ -22,10 +22,10 @@ const useJewelleryByCategory = (category) => {
       }
     };
 
-    fetchJewellery();
+    fetchTrophies();
   }, [category]);
 
-  return { jewellaries, error };
+  return { trophies, error };
 };
 
-export default useJewelleryByCategory;
+export default useTrophyByCategory;

@@ -1,33 +1,33 @@
 import apiClient from "./apiClient";
 
-export const createJewellary = async (form) => {
-  const { data } = await apiClient.post("/jewellary/", form, {
+export const createTrophy = async (form) => {
+  const { data } = await apiClient.post("/trophy/", form, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
   });
   return data;
 };
-export const getJewellaryByCategory = async (category) => {
-  const { data } = await apiClient.get("/jewellary/all/" + category);
+export const getTrophyByCategory = async (category) => {
+  const { data } = await apiClient.get("/trophy/all/" + category);
   return data;
 };
-export const getHomeJewellery = async () => {
-  const { data } = await apiClient.get("/jewellary/home");
+export const getHomeTrophy = async () => {
+  const { data } = await apiClient.get("/trophy/home");
   return data;
 };
-export const getFullJewellaryByCategory = async (category) => {
-  const { data } = await apiClient.get("/jewellary/allDetails/" + category);
-  return data;
-};
-
-export const getJewellaryById = async (id) => {
-  const { data } = await apiClient.get("/jewellary/" + id);
+export const getFullTrophyByCategory = async (category) => {
+  const { data } = await apiClient.get("/trophy/allDetails/" + category);
   return data;
 };
 
-export const updateJewellary = async (id, payload) => {
-  const { data } = await apiClient.put("/jewellary/" + id, payload, {
+export const getTrophyById = async (id) => {
+  const { data } = await apiClient.get("/trophy/" + id);
+  return data;
+};
+
+export const updateTrophy = async (id, payload) => {
+  const { data } = await apiClient.put("/trophy/" + id, payload, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -35,7 +35,7 @@ export const updateJewellary = async (id, payload) => {
   return data;
 };
 
-export const deleteJewellary = async (id) => {
-  const { data } = await apiClient.delete("/jewellary/" + id);
+export const deleteTrophy = async (id) => {
+  const { data } = await apiClient.delete("/trophy/" + id);
   return data;
 };

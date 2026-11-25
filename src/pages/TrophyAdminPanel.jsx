@@ -1,40 +1,19 @@
 import { useEffect, useState } from "react";
-import {
-  createJewellary,
-  deleteJewellary,
-  getFullJewellaryByCategory,
-  updateJewellary,
-} from "../api/jewellaryApi";
 import { useLoader } from "../context/LoaderContext";
 import { error, success } from "../components/UIElement/toastsObj";
 import Swal from "sweetalert2";
+import {
+  createTrophy,
+  deleteTrophy,
+  getFullTrophyByCategory,
+  updateTrophy,
+} from "../api/jewellaryApi";
 
-const categories = [
-  "Necklace",
-  "Ring",
-  "Earring",
-  "Bracelet",
-  "Anklet",
-  "Pendant",
-  "Chain",
-  "Other",
-];
+const categories = ["Fibre Cups", "Corporate Mementos", "Economy"];
 
-const metalTypes = [
-  "Gold",
-  "Silver",
-  "Platinum",
-  "Diamond",
-  "Artificial",
-  "Other",
-];
-
-const purity = ["22K", "18K", "925 Silver"];
-const stoneType = ["Diamond", "Ruby", "Emerald", "Kundan", "Others"];
-
-export default function JewelleryAdminPanel() {
+export default function TrophyAdminPanel() {
   const [originalData, setOriginalData] = useState(null);
-  const [jewellaries, setJewellaries] = useState([]);
+  const [trophies, setTrophies] = useState([]);
   const [selectedCat, setSelectedCat] = useState("Necklace");
   const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState(getEmptyForm());
@@ -42,31 +21,30 @@ export default function JewelleryAdminPanel() {
   const { show, hide } = useLoader();
 
   useEffect(() => {
-    fetchJewellery();
+    fetchTrophies();
   }, [selectedCat]);
 
-  const fetchJewellery = async () => {
+  const fetchTrophies = async () => {
     try {
       show();
-      const { data } = await getFullJewellaryByCategory(selectedCat);
-      setJewellaries(data.jewellery || data);
+      const { data } = await getFullTrophyByCategory(selectedCat);
+      setTrophies(data);
     } catch (err) {
       console.log(err);
     } finally {
       hide();
     }
   };
+
   function getEmptyForm() {
     return {
       name: "",
       description: "",
       shortDescription: "",
-      gender: "",
-      metalType: "",
+      price: 0,
+      discountPrice: 0,
       category: "",
-      purity: "",
-      weight: "",
-      stoneType: "",
+      height : "",
       images: [],
       stock: 1,
     };
@@ -110,7 +88,7 @@ export default function JewelleryAdminPanel() {
       if (result.isConfirmed) {
         try {
           show(); // show loader
-          const response = await deleteJewellary(id); // API call
+          const response = await deleteTrophy(id); // API call
           success("Product deleted successfully"); // success toast
           fetchJewellery(); // refresh cart or list
         } catch (e) {
@@ -159,7 +137,7 @@ export default function JewelleryAdminPanel() {
   };
 
   const MAX_IMAGES = 5;
-  const MAX_FILE_SIZE = 3 * 1024 * 1024; // 2MB
+  const MAX_FILE_SIZE = 7 * 1024 * 1024;
   const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif"];
 
   const handleImageChange = (e) => {
@@ -185,7 +163,7 @@ export default function JewelleryAdminPanel() {
       }
 
       if (file.size > MAX_FILE_SIZE) {
-        error(`"${file.name}" exceeds 3MB size limit`);
+        error(`"${file.name}" exceeds 7MB size limit`);
         continue;
       }
 
@@ -250,15 +228,15 @@ export default function JewelleryAdminPanel() {
     setFormData(getEmptyForm());
   }
 
-  const handleSaveJewellery = async () => {
+  const handleSaveTrophies = async () => {
     try {
       show();
       const payload = editingId ? buildUpdatePayload() : buildCreatePayload();
       if (editingId) {
-        await updateJewellary(editingId, payload);
+        await updateTrophy(editingId, payload);
         success("Product updated successfully");
       } else {
-        await createJewellary(payload);
+        await createTrophy(payload);
         success("Product added successfully");
       }
     } catch (e) {
@@ -272,7 +250,7 @@ export default function JewelleryAdminPanel() {
       hide();
     }
   };
-
+  console.log(formData)
   return (
     <div className="min-h-screen bg-custom-yellow flex items-center justify-center py-10 px-2">
       <div className="w-full bg-white flex">
@@ -296,12 +274,12 @@ export default function JewelleryAdminPanel() {
             Inventory ({selectedCat})
           </div>
           <div className="space-y-2 h-[600px] overflow-y-auto pr-2 custom-scroll">
-            {jewellaries.length === 0 && (
+            {trophies.length === 0 && (
               <div className="text-gray-400 text-sm p-8 text-center">
                 No items in this category.
               </div>
             )}
-            {jewellaries.map((item) => (
+            {trophies.map((item) => (
               <div
                 key={item._id}
                 className="flex items-center rounded-xl bg-gradient-to-l from-pink-100 to-yellow-50 p-3 shadow hover:shadow-lg gap-2 transition animate-fade-in"
@@ -390,97 +368,34 @@ export default function JewelleryAdminPanel() {
                 className="w-full h-[150px] px-3 py-2 rounded-lg border transition"
               />
             </div>
+
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <label className="block text-sm font-semibold mb-1">
-                  Gender
-                </label>
-                <select
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 rounded-lg border transition"
-                >
-                  <option value="">Select</option>
-                  <option>Women</option>
-                  <option>Men</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-1">
-                  Metal
-                </label>
-                <select
-                  name="metalType"
-                  value={formData.metalType}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 rounded-lg border transition"
-                >
-                  <option value="">Select</option>
-                  {metalTypes.map((metal) => (
-                    <option key={metal} value={metal}>
-                      {metal}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <label className="block text-sm font-semibold mb-1">
-                  Purity
-                </label>
-                <select
-                  name="purity"
-                  value={formData.purity}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 rounded-lg border transition"
-                >
-                  <option value="">Select</option>
-                  {purity.map((metal) => (
-                    <option key={metal} value={metal}>
-                      {metal}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-1">
-                  Weight
+                  Price
                 </label>
                 <input
-                  name="weight"
-                  value={formData.weight}
+                  name="price"
+                  value={formData.price}
                   onChange={handleChange}
                   type="number"
-                  placeholder="e.g. 13g"
+                  className="w-full px-3 py-2 rounded-lg border focus:ring ring-pink-300 transition"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">
+                  Discounted Price
+                </label>
+                <input
+                  name="discountPrice"
+                  value={formData.discountPrice}
+                  onChange={handleChange}
+                  type="number"
                   className="w-full px-3 py-2 rounded-lg border focus:ring ring-pink-300 transition"
                 />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2">
-              <div>
-                <label className="block text-sm font-semibold mb-1">
-                  Stone Type
-                </label>
-                <select
-                  name="stoneType"
-                  value={formData.stoneType}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 rounded-lg border transition"
-                >
-                  <option value="">Select</option>
-                  {stoneType.map((metal) => (
-                    <option key={metal} value={metal}>
-                      {metal}
-                    </option>
-                  ))}
-                </select>
-              </div>
               <div>
                 <label className="block text-sm font-semibold mb-1">
                   Category
@@ -499,6 +414,31 @@ export default function JewelleryAdminPanel() {
                     </option>
                   ))}
                 </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">
+                  Stock
+                </label>
+                <input
+                  name="stock"
+                  value={formData.stock}
+                  onChange={handleChange}
+                  type="number"
+                  min={1}
+                  className="w-full px-3 py-2 rounded-lg border focus:ring transition"
+                />
+              </div>
+               <div>
+                <label className="block text-sm font-semibold mb-1">
+                  height
+                </label>
+                <input
+                  name="height"
+                  placeholder="height in inches"
+                  value={formData.height}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 rounded-lg border focus:ring transition"
+                />
               </div>
             </div>
             <div>
@@ -551,21 +491,10 @@ export default function JewelleryAdminPanel() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-semibold mb-1">Stock</label>
-              <input
-                name="stock"
-                value={formData.stock}
-                onChange={handleChange}
-                type="number"
-                min={1}
-                className="w-full px-3 py-2 rounded-lg border focus:ring transition"
-              />
-            </div>
             <div className="flex gap-3 mt-4 items-center">
               <button
                 type="submit"
-                onClick={handleSaveJewellery}
+                onClick={handleSaveTrophies}
                 className="py-2 flex px-4 border cursor-pointer bg-black text-white hover:bg-gray-800 font-bold rounded-lg transition shadow-lg"
               >
                 {editingId ? "Update" : "Save"}

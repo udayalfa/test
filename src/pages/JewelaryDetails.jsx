@@ -3,20 +3,22 @@ import FeatureSection from "../components/FeatureSection";
 import JewellaryData from "../components/JewellaryData";
 import JewellaryImages from "../components/JewellaryImages";
 import { useParams } from "react-router-dom";
-import { getJewellaryById } from "../api/jewellaryApi";
 import { useLoader } from "../context/LoaderContext";
+import { getTrophyById } from "../api/jewellaryApi";
+import TrophyImages from "../components/JewellaryImages";
+import TrophyData from "../components/JewellaryData";
 
-const JewellaryDetail = () => {
+const TrophyDetails = () => {
   const { id } = useParams();
-  const [jewellary, setJewellary] = useState(null);
+  const [trophy, setTrophy] = useState(null);
   const { show, hide } = useLoader();
 
   useEffect(() => {
     const api = async () => {
       try {
         show();
-        const { data } = await getJewellaryById(id);
-        setJewellary(data);
+        const { data } = await getTrophyById(id);
+        setTrophy(data);
       } catch (e) {
         console.log(e);
       } finally {
@@ -31,13 +33,13 @@ const JewellaryDetail = () => {
 
   // Auto-slide every 3 seconds
   useEffect(() => {
-    if (!jewellary?.images) return;
+    if (!trophy?.images) return;
     const next = () => {
-      setCurrent((prev) => (prev + 1) % jewellary.images.length);
+      setCurrent((prev) => (prev + 1) % trophy?.images.length);
     };
     timeoutRef.current = setInterval(next, 3000);
     return () => clearInterval(timeoutRef.current);
-  }, [jewellary?.images]);
+  }, [trophy?.images]);
 
   const handleThumbnailClick = (idx) => {
     setCurrent(idx);
@@ -47,19 +49,18 @@ const JewellaryDetail = () => {
   return (
     <div className="px-4 sm:px-6 lg:px-10 py-6">
       <div className="flex flex-col md:flex-row gap-8 md:gap-10">
-        <JewellaryImages
-          product={jewellary}
+        <TrophyImages
+          product={trophy}
           current={current}
           setCurrent={setCurrent}
           handleThumbnailClick={handleThumbnailClick}
         />
 
-        <JewellaryData product={jewellary} />
+        <TrophyData product={trophy} />
       </div>
-
       <FeatureSection />
     </div>
   );
 };
 
-export default JewellaryDetail;
+export default TrophyDetails;

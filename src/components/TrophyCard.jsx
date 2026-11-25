@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function JewelryCard({ jewellary }) {
+function TrophyCard({ trophy }) {
   const navigate = useNavigate();
   return (
     <div
-      onClick={() => navigate(`/${jewellary._id}`)}
+      onClick={() => navigate(`/${trophy._id}`)}
       className="
     bg-white
     group
@@ -19,8 +19,8 @@ function JewelryCard({ jewellary }) {
       {/* Image */}
       <div className="overflow-hidden rounded-md">
         <img
-          src={jewellary?.images[0]}
-          alt={jewellary?.name}
+          src={trophy?.images[0]}
+          alt={trophy?.name}
           className="
         w-full
         aspect-[5/4]
@@ -35,19 +35,19 @@ function JewelryCard({ jewellary }) {
       {/* Content */}
       <div className="px-4 py-4">
         <h2 className="text-lg md:text-xl lg:text-2xl font-semibold mb-1">
-          {jewellary?.name}
+          {trophy?.name}
         </h2>
 
         <p className="text-sm md:text-base text-gray-600 line-clamp-2 mb-2">
-          {jewellary?.shortDescription}
+          {trophy?.shortDescription}
         </p>
 
         <span className="text-base md:text-lg lg:text-xl font-bold">
-          {jewellary?.weight}g
+          {trophy?.height} inches
         </span>
       </div>
     </div>
   );
 }
 
-export default JewelryCard;
+export default TrophyCard;
